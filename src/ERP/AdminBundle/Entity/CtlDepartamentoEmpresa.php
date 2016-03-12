@@ -17,7 +17,7 @@ class CtlDepartamentoEmpresa
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -31,9 +31,7 @@ class CtlDepartamentoEmpresa
     /**
      * @var \CtlSucursal
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="CtlSucursal")
+     * @ORM\ManyToOne(targetEntity="CtlSucursal")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ctl_sucursal_id", referencedColumnName="id")
      * })
@@ -41,19 +39,6 @@ class CtlDepartamentoEmpresa
     private $ctlSucursal;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return CtlDepartamentoEmpresa
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -94,7 +79,7 @@ class CtlDepartamentoEmpresa
      * @param \ERP\AdminBundle\Entity\CtlSucursal $ctlSucursal
      * @return CtlDepartamentoEmpresa
      */
-    public function setCtlSucursal(\ERP\AdminBundle\Entity\CtlSucursal $ctlSucursal)
+    public function setCtlSucursal(\ERP\AdminBundle\Entity\CtlSucursal $ctlSucursal = null)
     {
         $this->ctlSucursal = $ctlSucursal;
 

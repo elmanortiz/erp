@@ -17,7 +17,7 @@ class RhEstructuraSalarios
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -38,9 +38,7 @@ class RhEstructuraSalarios
     /**
      * @var \RhPersona
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhPersona")
+     * @ORM\ManyToOne(targetEntity="RhPersona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_persona_id", referencedColumnName="id")
      * })
@@ -48,19 +46,6 @@ class RhEstructuraSalarios
     private $rhPersona;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhEstructuraSalarios
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -124,7 +109,7 @@ class RhEstructuraSalarios
      * @param \ERP\AdminBundle\Entity\RhPersona $rhPersona
      * @return RhEstructuraSalarios
      */
-    public function setRhPersona(\ERP\AdminBundle\Entity\RhPersona $rhPersona)
+    public function setRhPersona(\ERP\AdminBundle\Entity\RhPersona $rhPersona = null)
     {
         $this->rhPersona = $rhPersona;
 

@@ -17,7 +17,7 @@ class CtlSucursal
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -57,43 +57,26 @@ class CtlSucursal
     private $direccionSucursal;
 
     /**
-     * @var \CtlEmpresa
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="CtlEmpresa")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ctl_empresa_id", referencedColumnName="id")
-     * })
-     */
-    private $ctlEmpresa;
-
-    /**
      * @var \CtlCiudad
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="CtlCiudad")
+     * @ORM\ManyToOne(targetEntity="CtlCiudad")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ctl_ciudad_id", referencedColumnName="id")
      * })
      */
     private $ctlCiudad;
 
-
-
     /**
-     * Set id
+     * @var \CtlEmpresa
      *
-     * @param integer $id
-     * @return CtlSucursal
+     * @ORM\ManyToOne(targetEntity="CtlEmpresa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_empresa_id", referencedColumnName="id")
+     * })
      */
-    public function setId($id)
-    {
-        $this->id = $id;
+    private $ctlEmpresa;
 
-        return $this;
-    }
+
 
     /**
      * Get id
@@ -221,35 +204,12 @@ class CtlSucursal
     }
 
     /**
-     * Set ctlEmpresa
-     *
-     * @param \ERP\AdminBundle\Entity\CtlEmpresa $ctlEmpresa
-     * @return CtlSucursal
-     */
-    public function setCtlEmpresa(\ERP\AdminBundle\Entity\CtlEmpresa $ctlEmpresa)
-    {
-        $this->ctlEmpresa = $ctlEmpresa;
-
-        return $this;
-    }
-
-    /**
-     * Get ctlEmpresa
-     *
-     * @return \ERP\AdminBundle\Entity\CtlEmpresa 
-     */
-    public function getCtlEmpresa()
-    {
-        return $this->ctlEmpresa;
-    }
-
-    /**
      * Set ctlCiudad
      *
      * @param \ERP\AdminBundle\Entity\CtlCiudad $ctlCiudad
      * @return CtlSucursal
      */
-    public function setCtlCiudad(\ERP\AdminBundle\Entity\CtlCiudad $ctlCiudad)
+    public function setCtlCiudad(\ERP\AdminBundle\Entity\CtlCiudad $ctlCiudad = null)
     {
         $this->ctlCiudad = $ctlCiudad;
 
@@ -264,5 +224,28 @@ class CtlSucursal
     public function getCtlCiudad()
     {
         return $this->ctlCiudad;
+    }
+
+    /**
+     * Set ctlEmpresa
+     *
+     * @param \ERP\AdminBundle\Entity\CtlEmpresa $ctlEmpresa
+     * @return CtlSucursal
+     */
+    public function setCtlEmpresa(\ERP\AdminBundle\Entity\CtlEmpresa $ctlEmpresa = null)
+    {
+        $this->ctlEmpresa = $ctlEmpresa;
+
+        return $this;
+    }
+
+    /**
+     * Get ctlEmpresa
+     *
+     * @return \ERP\AdminBundle\Entity\CtlEmpresa 
+     */
+    public function getCtlEmpresa()
+    {
+        return $this->ctlEmpresa;
     }
 }

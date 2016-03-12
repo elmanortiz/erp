@@ -29,16 +29,6 @@ class CrmHistorialComunicacion
     private $valorDetalle;
 
     /**
-     * @var \CrmDetallePlantilla
-     *
-     * @ORM\ManyToOne(targetEntity="CrmDetallePlantilla")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="detalle_plantilla_id", referencedColumnName="id")
-     * })
-     */
-    private $detallePlantilla;
-
-    /**
      * @var \CrmComunicacion
      *
      * @ORM\ManyToOne(targetEntity="CrmComunicacion")
@@ -47,6 +37,16 @@ class CrmHistorialComunicacion
      * })
      */
     private $comunicacion;
+
+    /**
+     * @var \CrmDetallePlantilla
+     *
+     * @ORM\ManyToOne(targetEntity="CrmDetallePlantilla")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="detalle_plantilla_id", referencedColumnName="id")
+     * })
+     */
+    private $detallePlantilla;
 
 
 
@@ -84,29 +84,6 @@ class CrmHistorialComunicacion
     }
 
     /**
-     * Set detallePlantilla
-     *
-     * @param \ERP\AdminBundle\Entity\CrmDetallePlantilla $detallePlantilla
-     * @return CrmHistorialComunicacion
-     */
-    public function setDetallePlantilla(\ERP\AdminBundle\Entity\CrmDetallePlantilla $detallePlantilla = null)
-    {
-        $this->detallePlantilla = $detallePlantilla;
-
-        return $this;
-    }
-
-    /**
-     * Get detallePlantilla
-     *
-     * @return \ERP\AdminBundle\Entity\CrmDetallePlantilla 
-     */
-    public function getDetallePlantilla()
-    {
-        return $this->detallePlantilla;
-    }
-
-    /**
      * Set comunicacion
      *
      * @param \ERP\AdminBundle\Entity\CrmComunicacion $comunicacion
@@ -127,5 +104,28 @@ class CrmHistorialComunicacion
     public function getComunicacion()
     {
         return $this->comunicacion;
+    }
+
+    /**
+     * Set detallePlantilla
+     *
+     * @param \ERP\AdminBundle\Entity\CrmDetallePlantilla $detallePlantilla
+     * @return CrmHistorialComunicacion
+     */
+    public function setDetallePlantilla(\ERP\AdminBundle\Entity\CrmDetallePlantilla $detallePlantilla = null)
+    {
+        $this->detallePlantilla = $detallePlantilla;
+
+        return $this;
+    }
+
+    /**
+     * Get detallePlantilla
+     *
+     * @return \ERP\AdminBundle\Entity\CrmDetallePlantilla 
+     */
+    public function getDetallePlantilla()
+    {
+        return $this->detallePlantilla;
     }
 }

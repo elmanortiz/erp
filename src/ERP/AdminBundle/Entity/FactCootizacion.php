@@ -71,14 +71,14 @@ class FactCootizacion
     private $notaDestinatarios;
 
     /**
-     * @var \CtlEstadoCootizacion
+     * @var \CrmCliente
      *
-     * @ORM\ManyToOne(targetEntity="CtlEstadoCootizacion")
+     * @ORM\ManyToOne(targetEntity="CrmCliente")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="fact_estado_cootizacion_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="crm_cliente_id", referencedColumnName="id")
      * })
      */
-    private $factEstadoCootizacion;
+    private $crmCliente;
 
     /**
      * @var \CrmClientePotencial
@@ -91,14 +91,14 @@ class FactCootizacion
     private $crmClientePotencial;
 
     /**
-     * @var \CrmCliente
+     * @var \CtlEstadoCootizacion
      *
-     * @ORM\ManyToOne(targetEntity="CrmCliente")
+     * @ORM\ManyToOne(targetEntity="CtlEstadoCootizacion")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="crm_cliente_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="fact_estado_cootizacion_id", referencedColumnName="id")
      * })
      */
-    private $crmCliente;
+    private $factEstadoCootizacion;
 
 
 
@@ -274,26 +274,26 @@ class FactCootizacion
     }
 
     /**
-     * Set factEstadoCootizacion
+     * Set crmCliente
      *
-     * @param \ERP\AdminBundle\Entity\CtlEstadoCootizacion $factEstadoCootizacion
+     * @param \ERP\AdminBundle\Entity\CrmCliente $crmCliente
      * @return FactCootizacion
      */
-    public function setFactEstadoCootizacion(\ERP\AdminBundle\Entity\CtlEstadoCootizacion $factEstadoCootizacion = null)
+    public function setCrmCliente(\ERP\AdminBundle\Entity\CrmCliente $crmCliente = null)
     {
-        $this->factEstadoCootizacion = $factEstadoCootizacion;
+        $this->crmCliente = $crmCliente;
 
         return $this;
     }
 
     /**
-     * Get factEstadoCootizacion
+     * Get crmCliente
      *
-     * @return \ERP\AdminBundle\Entity\CtlEstadoCootizacion 
+     * @return \ERP\AdminBundle\Entity\CrmCliente 
      */
-    public function getFactEstadoCootizacion()
+    public function getCrmCliente()
     {
-        return $this->factEstadoCootizacion;
+        return $this->crmCliente;
     }
 
     /**
@@ -320,25 +320,25 @@ class FactCootizacion
     }
 
     /**
-     * Set crmCliente
+     * Set factEstadoCootizacion
      *
-     * @param \ERP\AdminBundle\Entity\CrmCliente $crmCliente
+     * @param \ERP\AdminBundle\Entity\CtlEstadoCootizacion $factEstadoCootizacion
      * @return FactCootizacion
      */
-    public function setCrmCliente(\ERP\AdminBundle\Entity\CrmCliente $crmCliente = null)
+    public function setFactEstadoCootizacion(\ERP\AdminBundle\Entity\CtlEstadoCootizacion $factEstadoCootizacion = null)
     {
-        $this->crmCliente = $crmCliente;
+        $this->factEstadoCootizacion = $factEstadoCootizacion;
 
         return $this;
     }
 
     /**
-     * Get crmCliente
+     * Get factEstadoCootizacion
      *
-     * @return \ERP\AdminBundle\Entity\CrmCliente 
+     * @return \ERP\AdminBundle\Entity\CtlEstadoCootizacion 
      */
-    public function getCrmCliente()
+    public function getFactEstadoCootizacion()
     {
-        return $this->crmCliente;
+        return $this->factEstadoCootizacion;
     }
 }

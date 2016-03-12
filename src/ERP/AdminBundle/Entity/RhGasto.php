@@ -17,7 +17,7 @@ class RhGasto
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -80,9 +80,7 @@ class RhGasto
     /**
      * @var \RhPersona
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhPersona")
+     * @ORM\ManyToOne(targetEntity="RhPersona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_persona_empleado_id", referencedColumnName="id")
      * })
@@ -92,9 +90,7 @@ class RhGasto
     /**
      * @var \RhPersona
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhPersona")
+     * @ORM\ManyToOne(targetEntity="RhPersona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_persona_supervisor_id", referencedColumnName="id")
      * })
@@ -102,19 +98,6 @@ class RhGasto
     private $rhPersonaSupervisor;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhGasto
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -316,7 +299,7 @@ class RhGasto
      * @param \ERP\AdminBundle\Entity\RhPersona $rhPersonaEmpleado
      * @return RhGasto
      */
-    public function setRhPersonaEmpleado(\ERP\AdminBundle\Entity\RhPersona $rhPersonaEmpleado)
+    public function setRhPersonaEmpleado(\ERP\AdminBundle\Entity\RhPersona $rhPersonaEmpleado = null)
     {
         $this->rhPersonaEmpleado = $rhPersonaEmpleado;
 
@@ -339,7 +322,7 @@ class RhGasto
      * @param \ERP\AdminBundle\Entity\RhPersona $rhPersonaSupervisor
      * @return RhGasto
      */
-    public function setRhPersonaSupervisor(\ERP\AdminBundle\Entity\RhPersona $rhPersonaSupervisor)
+    public function setRhPersonaSupervisor(\ERP\AdminBundle\Entity\RhPersona $rhPersonaSupervisor = null)
     {
         $this->rhPersonaSupervisor = $rhPersonaSupervisor;
 

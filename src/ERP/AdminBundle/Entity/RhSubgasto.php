@@ -17,7 +17,7 @@ class RhSubgasto
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -59,9 +59,7 @@ class RhSubgasto
     /**
      * @var \RhGasto
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhGasto")
+     * @ORM\ManyToOne(targetEntity="RhGasto")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_gastos_id", referencedColumnName="id")
      * })
@@ -69,19 +67,6 @@ class RhSubgasto
     private $rhGastos;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhSubgasto
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -214,7 +199,7 @@ class RhSubgasto
      * @param \ERP\AdminBundle\Entity\RhGasto $rhGastos
      * @return RhSubgasto
      */
-    public function setRhGastos(\ERP\AdminBundle\Entity\RhGasto $rhGastos)
+    public function setRhGastos(\ERP\AdminBundle\Entity\RhGasto $rhGastos = null)
     {
         $this->rhGastos = $rhGastos;
 

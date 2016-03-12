@@ -17,7 +17,7 @@ class RhPersona
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -101,9 +101,7 @@ class RhPersona
     /**
      * @var \CtlCiudad
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="CtlCiudad")
+     * @ORM\ManyToOne(targetEntity="CtlCiudad")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ctl_ciudad_id", referencedColumnName="id")
      * })
@@ -111,19 +109,6 @@ class RhPersona
     private $ctlCiudad;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhPersona
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -394,7 +379,7 @@ class RhPersona
      * @param \ERP\AdminBundle\Entity\CtlCiudad $ctlCiudad
      * @return RhPersona
      */
-    public function setCtlCiudad(\ERP\AdminBundle\Entity\CtlCiudad $ctlCiudad)
+    public function setCtlCiudad(\ERP\AdminBundle\Entity\CtlCiudad $ctlCiudad = null)
     {
         $this->ctlCiudad = $ctlCiudad;
 

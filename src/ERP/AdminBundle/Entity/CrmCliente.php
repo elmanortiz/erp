@@ -60,16 +60,6 @@ class CrmCliente
     private $categoriaCliente;
 
     /**
-     * @var \CtlTerritorio
-     *
-     * @ORM\ManyToOne(targetEntity="CtlTerritorio")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="territorio_id", referencedColumnName="id")
-     * })
-     */
-    private $territorio;
-
-    /**
      * @var \CrmClientePotencial
      *
      * @ORM\ManyToOne(targetEntity="CrmClientePotencial")
@@ -78,6 +68,16 @@ class CrmCliente
      * })
      */
     private $clientePotencial;
+
+    /**
+     * @var \CtlTerritorio
+     *
+     * @ORM\ManyToOne(targetEntity="CtlTerritorio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="territorio_id", referencedColumnName="id")
+     * })
+     */
+    private $territorio;
 
 
 
@@ -207,29 +207,6 @@ class CrmCliente
     }
 
     /**
-     * Set territorio
-     *
-     * @param \ERP\AdminBundle\Entity\CtlTerritorio $territorio
-     * @return CrmCliente
-     */
-    public function setTerritorio(\ERP\AdminBundle\Entity\CtlTerritorio $territorio = null)
-    {
-        $this->territorio = $territorio;
-
-        return $this;
-    }
-
-    /**
-     * Get territorio
-     *
-     * @return \ERP\AdminBundle\Entity\CtlTerritorio 
-     */
-    public function getTerritorio()
-    {
-        return $this->territorio;
-    }
-
-    /**
      * Set clientePotencial
      *
      * @param \ERP\AdminBundle\Entity\CrmClientePotencial $clientePotencial
@@ -250,5 +227,28 @@ class CrmCliente
     public function getClientePotencial()
     {
         return $this->clientePotencial;
+    }
+
+    /**
+     * Set territorio
+     *
+     * @param \ERP\AdminBundle\Entity\CtlTerritorio $territorio
+     * @return CrmCliente
+     */
+    public function setTerritorio(\ERP\AdminBundle\Entity\CtlTerritorio $territorio = null)
+    {
+        $this->territorio = $territorio;
+
+        return $this;
+    }
+
+    /**
+     * Get territorio
+     *
+     * @return \ERP\AdminBundle\Entity\CtlTerritorio 
+     */
+    public function getTerritorio()
+    {
+        return $this->territorio;
     }
 }

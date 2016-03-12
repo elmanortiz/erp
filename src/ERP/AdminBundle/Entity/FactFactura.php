@@ -109,16 +109,6 @@ class FactFactura
     private $factFechausuario;
 
     /**
-     * @var \CrmClientePotencial
-     *
-     * @ORM\ManyToOne(targetEntity="CrmClientePotencial")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="crm_cliente_potencial_id", referencedColumnName="id")
-     * })
-     */
-    private $crmClientePotencial;
-
-    /**
      * @var \CrmCliente
      *
      * @ORM\ManyToOne(targetEntity="CrmCliente")
@@ -127,6 +117,16 @@ class FactFactura
      * })
      */
     private $crmCliente;
+
+    /**
+     * @var \CrmClientePotencial
+     *
+     * @ORM\ManyToOne(targetEntity="CrmClientePotencial")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="crm_cliente_potencial_id", referencedColumnName="id")
+     * })
+     */
+    private $crmClientePotencial;
 
 
 
@@ -417,29 +417,6 @@ class FactFactura
     }
 
     /**
-     * Set crmClientePotencial
-     *
-     * @param \ERP\AdminBundle\Entity\CrmClientePotencial $crmClientePotencial
-     * @return FactFactura
-     */
-    public function setCrmClientePotencial(\ERP\AdminBundle\Entity\CrmClientePotencial $crmClientePotencial = null)
-    {
-        $this->crmClientePotencial = $crmClientePotencial;
-
-        return $this;
-    }
-
-    /**
-     * Get crmClientePotencial
-     *
-     * @return \ERP\AdminBundle\Entity\CrmClientePotencial 
-     */
-    public function getCrmClientePotencial()
-    {
-        return $this->crmClientePotencial;
-    }
-
-    /**
      * Set crmCliente
      *
      * @param \ERP\AdminBundle\Entity\CrmCliente $crmCliente
@@ -460,5 +437,28 @@ class FactFactura
     public function getCrmCliente()
     {
         return $this->crmCliente;
+    }
+
+    /**
+     * Set crmClientePotencial
+     *
+     * @param \ERP\AdminBundle\Entity\CrmClientePotencial $crmClientePotencial
+     * @return FactFactura
+     */
+    public function setCrmClientePotencial(\ERP\AdminBundle\Entity\CrmClientePotencial $crmClientePotencial = null)
+    {
+        $this->crmClientePotencial = $crmClientePotencial;
+
+        return $this;
+    }
+
+    /**
+     * Get crmClientePotencial
+     *
+     * @return \ERP\AdminBundle\Entity\CrmClientePotencial 
+     */
+    public function getCrmClientePotencial()
+    {
+        return $this->crmClientePotencial;
     }
 }

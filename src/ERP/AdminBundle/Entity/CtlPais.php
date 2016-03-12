@@ -62,4 +62,7 @@ class CtlPais
     {
         return $this->nombrePais;
     }
+    public function __toString() {
+  return $this->nombrePais;
+}
 }

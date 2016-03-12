@@ -81,6 +81,16 @@ class CrmClientePotencial
     private $estadoClientePotencial;
 
     /**
+     * @var \CtlIndustriaCliente
+     *
+     * @ORM\ManyToOne(targetEntity="CtlIndustriaCliente")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="industria_cliente_id", referencedColumnName="id")
+     * })
+     */
+    private $industriaCliente;
+
+    /**
      * @var \CtlReferenciaCliente
      *
      * @ORM\ManyToOne(targetEntity="CtlReferenciaCliente")
@@ -89,6 +99,16 @@ class CrmClientePotencial
      * })
      */
     private $referenciaCliente;
+
+    /**
+     * @var \CtlTerritorio
+     *
+     * @ORM\ManyToOne(targetEntity="CtlTerritorio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="territorio_id", referencedColumnName="id")
+     * })
+     */
+    private $territorio;
 
     /**
      * @var \Usuario
@@ -109,26 +129,6 @@ class CrmClientePotencial
      * })
      */
     private $idUsuarioPropietario;
-
-    /**
-     * @var \CtlTerritorio
-     *
-     * @ORM\ManyToOne(targetEntity="CtlTerritorio")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="territorio_id", referencedColumnName="id")
-     * })
-     */
-    private $territorio;
-
-    /**
-     * @var \CtlIndustriaCliente
-     *
-     * @ORM\ManyToOne(targetEntity="CtlIndustriaCliente")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="industria_cliente_id", referencedColumnName="id")
-     * })
-     */
-    private $industriaCliente;
 
     /**
      * @var \CrmEmpresaCliente
@@ -337,6 +337,29 @@ class CrmClientePotencial
     }
 
     /**
+     * Set industriaCliente
+     *
+     * @param \ERP\AdminBundle\Entity\CtlIndustriaCliente $industriaCliente
+     * @return CrmClientePotencial
+     */
+    public function setIndustriaCliente(\ERP\AdminBundle\Entity\CtlIndustriaCliente $industriaCliente = null)
+    {
+        $this->industriaCliente = $industriaCliente;
+
+        return $this;
+    }
+
+    /**
+     * Get industriaCliente
+     *
+     * @return \ERP\AdminBundle\Entity\CtlIndustriaCliente 
+     */
+    public function getIndustriaCliente()
+    {
+        return $this->industriaCliente;
+    }
+
+    /**
      * Set referenciaCliente
      *
      * @param \ERP\AdminBundle\Entity\CtlReferenciaCliente $referenciaCliente
@@ -357,6 +380,29 @@ class CrmClientePotencial
     public function getReferenciaCliente()
     {
         return $this->referenciaCliente;
+    }
+
+    /**
+     * Set territorio
+     *
+     * @param \ERP\AdminBundle\Entity\CtlTerritorio $territorio
+     * @return CrmClientePotencial
+     */
+    public function setTerritorio(\ERP\AdminBundle\Entity\CtlTerritorio $territorio = null)
+    {
+        $this->territorio = $territorio;
+
+        return $this;
+    }
+
+    /**
+     * Get territorio
+     *
+     * @return \ERP\AdminBundle\Entity\CtlTerritorio 
+     */
+    public function getTerritorio()
+    {
+        return $this->territorio;
     }
 
     /**
@@ -403,52 +449,6 @@ class CrmClientePotencial
     public function getIdUsuarioPropietario()
     {
         return $this->idUsuarioPropietario;
-    }
-
-    /**
-     * Set territorio
-     *
-     * @param \ERP\AdminBundle\Entity\CtlTerritorio $territorio
-     * @return CrmClientePotencial
-     */
-    public function setTerritorio(\ERP\AdminBundle\Entity\CtlTerritorio $territorio = null)
-    {
-        $this->territorio = $territorio;
-
-        return $this;
-    }
-
-    /**
-     * Get territorio
-     *
-     * @return \ERP\AdminBundle\Entity\CtlTerritorio 
-     */
-    public function getTerritorio()
-    {
-        return $this->territorio;
-    }
-
-    /**
-     * Set industriaCliente
-     *
-     * @param \ERP\AdminBundle\Entity\CtlIndustriaCliente $industriaCliente
-     * @return CrmClientePotencial
-     */
-    public function setIndustriaCliente(\ERP\AdminBundle\Entity\CtlIndustriaCliente $industriaCliente = null)
-    {
-        $this->industriaCliente = $industriaCliente;
-
-        return $this;
-    }
-
-    /**
-     * Get industriaCliente
-     *
-     * @return \ERP\AdminBundle\Entity\CtlIndustriaCliente 
-     */
-    public function getIndustriaCliente()
-    {
-        return $this->industriaCliente;
     }
 
     /**

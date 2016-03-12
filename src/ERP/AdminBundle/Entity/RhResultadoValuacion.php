@@ -17,16 +17,14 @@ class RhResultadoValuacion
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var \RhAreasResultado
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhAreasResultado")
+     * @ORM\ManyToOne(targetEntity="RhAreasResultado")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_areas_resultado_id", referencedColumnName="id")
      * })
@@ -36,9 +34,7 @@ class RhResultadoValuacion
     /**
      * @var \RhEvaluacion
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhEvaluacion")
+     * @ORM\ManyToOne(targetEntity="RhEvaluacion")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_evaluacion_id", referencedColumnName="id")
      * })
@@ -46,19 +42,6 @@ class RhResultadoValuacion
     private $rhEvaluacion;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhResultadoValuacion
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -76,7 +59,7 @@ class RhResultadoValuacion
      * @param \ERP\AdminBundle\Entity\RhAreasResultado $rhAreasResultado
      * @return RhResultadoValuacion
      */
-    public function setRhAreasResultado(\ERP\AdminBundle\Entity\RhAreasResultado $rhAreasResultado)
+    public function setRhAreasResultado(\ERP\AdminBundle\Entity\RhAreasResultado $rhAreasResultado = null)
     {
         $this->rhAreasResultado = $rhAreasResultado;
 
@@ -99,7 +82,7 @@ class RhResultadoValuacion
      * @param \ERP\AdminBundle\Entity\RhEvaluacion $rhEvaluacion
      * @return RhResultadoValuacion
      */
-    public function setRhEvaluacion(\ERP\AdminBundle\Entity\RhEvaluacion $rhEvaluacion)
+    public function setRhEvaluacion(\ERP\AdminBundle\Entity\RhEvaluacion $rhEvaluacion = null)
     {
         $this->rhEvaluacion = $rhEvaluacion;
 

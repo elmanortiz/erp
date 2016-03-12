@@ -17,7 +17,7 @@ class RhSalario
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -29,43 +29,26 @@ class RhSalario
     private $importe;
 
     /**
-     * @var \RhTipoIngreso
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhTipoIngreso")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="rh_tipo_ingreso_id", referencedColumnName="id")
-     * })
-     */
-    private $rhTipoIngreso;
-
-    /**
      * @var \RhEstructuraSalarios
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhEstructuraSalarios")
+     * @ORM\ManyToOne(targetEntity="RhEstructuraSalarios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_estructura_salarios_id", referencedColumnName="id")
      * })
      */
     private $rhEstructuraSalarios;
 
-
-
     /**
-     * Set id
+     * @var \RhTipoIngreso
      *
-     * @param integer $id
-     * @return RhSalario
+     * @ORM\ManyToOne(targetEntity="RhTipoIngreso")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="rh_tipo_ingreso_id", referencedColumnName="id")
+     * })
      */
-    public function setId($id)
-    {
-        $this->id = $id;
+    private $rhTipoIngreso;
 
-        return $this;
-    }
+
 
     /**
      * Get id
@@ -101,35 +84,12 @@ class RhSalario
     }
 
     /**
-     * Set rhTipoIngreso
-     *
-     * @param \ERP\AdminBundle\Entity\RhTipoIngreso $rhTipoIngreso
-     * @return RhSalario
-     */
-    public function setRhTipoIngreso(\ERP\AdminBundle\Entity\RhTipoIngreso $rhTipoIngreso)
-    {
-        $this->rhTipoIngreso = $rhTipoIngreso;
-
-        return $this;
-    }
-
-    /**
-     * Get rhTipoIngreso
-     *
-     * @return \ERP\AdminBundle\Entity\RhTipoIngreso 
-     */
-    public function getRhTipoIngreso()
-    {
-        return $this->rhTipoIngreso;
-    }
-
-    /**
      * Set rhEstructuraSalarios
      *
      * @param \ERP\AdminBundle\Entity\RhEstructuraSalarios $rhEstructuraSalarios
      * @return RhSalario
      */
-    public function setRhEstructuraSalarios(\ERP\AdminBundle\Entity\RhEstructuraSalarios $rhEstructuraSalarios)
+    public function setRhEstructuraSalarios(\ERP\AdminBundle\Entity\RhEstructuraSalarios $rhEstructuraSalarios = null)
     {
         $this->rhEstructuraSalarios = $rhEstructuraSalarios;
 
@@ -144,5 +104,28 @@ class RhSalario
     public function getRhEstructuraSalarios()
     {
         return $this->rhEstructuraSalarios;
+    }
+
+    /**
+     * Set rhTipoIngreso
+     *
+     * @param \ERP\AdminBundle\Entity\RhTipoIngreso $rhTipoIngreso
+     * @return RhSalario
+     */
+    public function setRhTipoIngreso(\ERP\AdminBundle\Entity\RhTipoIngreso $rhTipoIngreso = null)
+    {
+        $this->rhTipoIngreso = $rhTipoIngreso;
+
+        return $this;
+    }
+
+    /**
+     * Get rhTipoIngreso
+     *
+     * @return \ERP\AdminBundle\Entity\RhTipoIngreso 
+     */
+    public function getRhTipoIngreso()
+    {
+        return $this->rhTipoIngreso;
     }
 }

@@ -85,16 +85,6 @@ class InvProducto
     private $totalExistencia;
 
     /**
-     * @var \InvZona
-     *
-     * @ORM\ManyToOne(targetEntity="InvZona")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="inv_zona_id", referencedColumnName="id")
-     * })
-     */
-    private $invZona;
-
-    /**
      * @var \CltCatProducto
      *
      * @ORM\ManyToOne(targetEntity="CltCatProducto")
@@ -113,6 +103,16 @@ class InvProducto
      * })
      */
     private $invTipoInventario;
+
+    /**
+     * @var \InvZona
+     *
+     * @ORM\ManyToOne(targetEntity="InvZona")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="inv_zona_id", referencedColumnName="id")
+     * })
+     */
+    private $invZona;
 
 
 
@@ -334,29 +334,6 @@ class InvProducto
     }
 
     /**
-     * Set invZona
-     *
-     * @param \ERP\AdminBundle\Entity\InvZona $invZona
-     * @return InvProducto
-     */
-    public function setInvZona(\ERP\AdminBundle\Entity\InvZona $invZona = null)
-    {
-        $this->invZona = $invZona;
-
-        return $this;
-    }
-
-    /**
-     * Get invZona
-     *
-     * @return \ERP\AdminBundle\Entity\InvZona 
-     */
-    public function getInvZona()
-    {
-        return $this->invZona;
-    }
-
-    /**
      * Set invCatProducto
      *
      * @param \ERP\AdminBundle\Entity\CltCatProducto $invCatProducto
@@ -400,5 +377,28 @@ class InvProducto
     public function getInvTipoInventario()
     {
         return $this->invTipoInventario;
+    }
+
+    /**
+     * Set invZona
+     *
+     * @param \ERP\AdminBundle\Entity\InvZona $invZona
+     * @return InvProducto
+     */
+    public function setInvZona(\ERP\AdminBundle\Entity\InvZona $invZona = null)
+    {
+        $this->invZona = $invZona;
+
+        return $this;
+    }
+
+    /**
+     * Get invZona
+     *
+     * @return \ERP\AdminBundle\Entity\InvZona 
+     */
+    public function getInvZona()
+    {
+        return $this->invZona;
     }
 }

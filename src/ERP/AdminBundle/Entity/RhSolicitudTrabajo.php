@@ -17,7 +17,7 @@ class RhSolicitudTrabajo
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -59,9 +59,7 @@ class RhSolicitudTrabajo
     /**
      * @var \RhOportunidadEmpleo
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhOportunidadEmpleo")
+     * @ORM\ManyToOne(targetEntity="RhOportunidadEmpleo")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_oportunidad_empleo_id", referencedColumnName="id")
      * })
@@ -69,19 +67,6 @@ class RhSolicitudTrabajo
     private $rhOportunidadEmpleo;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhSolicitudTrabajo
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -214,7 +199,7 @@ class RhSolicitudTrabajo
      * @param \ERP\AdminBundle\Entity\RhOportunidadEmpleo $rhOportunidadEmpleo
      * @return RhSolicitudTrabajo
      */
-    public function setRhOportunidadEmpleo(\ERP\AdminBundle\Entity\RhOportunidadEmpleo $rhOportunidadEmpleo)
+    public function setRhOportunidadEmpleo(\ERP\AdminBundle\Entity\RhOportunidadEmpleo $rhOportunidadEmpleo = null)
     {
         $this->rhOportunidadEmpleo = $rhOportunidadEmpleo;
 

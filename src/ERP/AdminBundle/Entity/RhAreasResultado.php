@@ -17,7 +17,7 @@ class RhAreasResultado
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -38,9 +38,7 @@ class RhAreasResultado
     /**
      * @var \RhPlantillaEvaluacion
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhPlantillaEvaluacion")
+     * @ORM\ManyToOne(targetEntity="RhPlantillaEvaluacion")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_evaluacion_id", referencedColumnName="id")
      * })
@@ -48,19 +46,6 @@ class RhAreasResultado
     private $rhEvaluacion;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhAreasResultado
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -124,7 +109,7 @@ class RhAreasResultado
      * @param \ERP\AdminBundle\Entity\RhPlantillaEvaluacion $rhEvaluacion
      * @return RhAreasResultado
      */
-    public function setRhEvaluacion(\ERP\AdminBundle\Entity\RhPlantillaEvaluacion $rhEvaluacion)
+    public function setRhEvaluacion(\ERP\AdminBundle\Entity\RhPlantillaEvaluacion $rhEvaluacion = null)
     {
         $this->rhEvaluacion = $rhEvaluacion;
 

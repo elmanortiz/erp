@@ -17,7 +17,7 @@ class RhExperienciaLaboral
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -73,9 +73,7 @@ class RhExperienciaLaboral
     /**
      * @var \RhPersona
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhPersona")
+     * @ORM\ManyToOne(targetEntity="RhPersona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_persona_id", referencedColumnName="id")
      * })
@@ -83,19 +81,6 @@ class RhExperienciaLaboral
     private $rhPersona;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhExperienciaLaboral
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -274,7 +259,7 @@ class RhExperienciaLaboral
      * @param \ERP\AdminBundle\Entity\RhPersona $rhPersona
      * @return RhExperienciaLaboral
      */
-    public function setRhPersona(\ERP\AdminBundle\Entity\RhPersona $rhPersona)
+    public function setRhPersona(\ERP\AdminBundle\Entity\RhPersona $rhPersona = null)
     {
         $this->rhPersona = $rhPersona;
 

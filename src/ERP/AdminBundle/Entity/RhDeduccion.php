@@ -17,7 +17,7 @@ class RhDeduccion
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -29,43 +29,26 @@ class RhDeduccion
     private $importeDeduccion;
 
     /**
-     * @var \RhTipoDeduccion
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhTipoDeduccion")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="rh_tipo_deduccion_id", referencedColumnName="id")
-     * })
-     */
-    private $rhTipoDeduccion;
-
-    /**
      * @var \RhEstructuraSalarios
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhEstructuraSalarios")
+     * @ORM\ManyToOne(targetEntity="RhEstructuraSalarios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_estructura_salarios_id", referencedColumnName="id")
      * })
      */
     private $rhEstructuraSalarios;
 
-
-
     /**
-     * Set id
+     * @var \RhTipoDeduccion
      *
-     * @param integer $id
-     * @return RhDeduccion
+     * @ORM\ManyToOne(targetEntity="RhTipoDeduccion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="rh_tipo_deduccion_id", referencedColumnName="id")
+     * })
      */
-    public function setId($id)
-    {
-        $this->id = $id;
+    private $rhTipoDeduccion;
 
-        return $this;
-    }
+
 
     /**
      * Get id
@@ -101,35 +84,12 @@ class RhDeduccion
     }
 
     /**
-     * Set rhTipoDeduccion
-     *
-     * @param \ERP\AdminBundle\Entity\RhTipoDeduccion $rhTipoDeduccion
-     * @return RhDeduccion
-     */
-    public function setRhTipoDeduccion(\ERP\AdminBundle\Entity\RhTipoDeduccion $rhTipoDeduccion)
-    {
-        $this->rhTipoDeduccion = $rhTipoDeduccion;
-
-        return $this;
-    }
-
-    /**
-     * Get rhTipoDeduccion
-     *
-     * @return \ERP\AdminBundle\Entity\RhTipoDeduccion 
-     */
-    public function getRhTipoDeduccion()
-    {
-        return $this->rhTipoDeduccion;
-    }
-
-    /**
      * Set rhEstructuraSalarios
      *
      * @param \ERP\AdminBundle\Entity\RhEstructuraSalarios $rhEstructuraSalarios
      * @return RhDeduccion
      */
-    public function setRhEstructuraSalarios(\ERP\AdminBundle\Entity\RhEstructuraSalarios $rhEstructuraSalarios)
+    public function setRhEstructuraSalarios(\ERP\AdminBundle\Entity\RhEstructuraSalarios $rhEstructuraSalarios = null)
     {
         $this->rhEstructuraSalarios = $rhEstructuraSalarios;
 
@@ -144,5 +104,28 @@ class RhDeduccion
     public function getRhEstructuraSalarios()
     {
         return $this->rhEstructuraSalarios;
+    }
+
+    /**
+     * Set rhTipoDeduccion
+     *
+     * @param \ERP\AdminBundle\Entity\RhTipoDeduccion $rhTipoDeduccion
+     * @return RhDeduccion
+     */
+    public function setRhTipoDeduccion(\ERP\AdminBundle\Entity\RhTipoDeduccion $rhTipoDeduccion = null)
+    {
+        $this->rhTipoDeduccion = $rhTipoDeduccion;
+
+        return $this;
+    }
+
+    /**
+     * Get rhTipoDeduccion
+     *
+     * @return \ERP\AdminBundle\Entity\RhTipoDeduccion 
+     */
+    public function getRhTipoDeduccion()
+    {
+        return $this->rhTipoDeduccion;
     }
 }

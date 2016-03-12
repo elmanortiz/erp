@@ -5,6 +5,7 @@
       <index name="fk_ctl_estado_ctl_pais1_idx" columns="ctl_pais_id"/>
     </indexes>
     <id name="id" type="integer" column="id"/>
+
     <id name="ctlPais" association-key="true"/>
     <field name="nombreEstado" type="string" column="nombre_estado" length="45" nullable="false"/>
     <one-to-one field="ctlPais" target-entity="CtlPais">

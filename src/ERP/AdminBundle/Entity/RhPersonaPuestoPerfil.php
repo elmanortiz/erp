@@ -17,7 +17,7 @@ class RhPersonaPuestoPerfil
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -38,9 +38,7 @@ class RhPersonaPuestoPerfil
     /**
      * @var \RhPersona
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhPersona")
+     * @ORM\ManyToOne(targetEntity="RhPersona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_persona_id", referencedColumnName="id")
      * })
@@ -50,9 +48,7 @@ class RhPersonaPuestoPerfil
     /**
      * @var \RhPuestoPerfil
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhPuestoPerfil")
+     * @ORM\ManyToOne(targetEntity="RhPuestoPerfil")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_puesto_perfil_id", referencedColumnName="id")
      * })
@@ -60,19 +56,6 @@ class RhPersonaPuestoPerfil
     private $rhPuestoPerfil;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhPersonaPuestoPerfil
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -136,7 +119,7 @@ class RhPersonaPuestoPerfil
      * @param \ERP\AdminBundle\Entity\RhPersona $rhPersona
      * @return RhPersonaPuestoPerfil
      */
-    public function setRhPersona(\ERP\AdminBundle\Entity\RhPersona $rhPersona)
+    public function setRhPersona(\ERP\AdminBundle\Entity\RhPersona $rhPersona = null)
     {
         $this->rhPersona = $rhPersona;
 
@@ -159,7 +142,7 @@ class RhPersonaPuestoPerfil
      * @param \ERP\AdminBundle\Entity\RhPuestoPerfil $rhPuestoPerfil
      * @return RhPersonaPuestoPerfil
      */
-    public function setRhPuestoPerfil(\ERP\AdminBundle\Entity\RhPuestoPerfil $rhPuestoPerfil)
+    public function setRhPuestoPerfil(\ERP\AdminBundle\Entity\RhPuestoPerfil $rhPuestoPerfil = null)
     {
         $this->rhPuestoPerfil = $rhPuestoPerfil;
 

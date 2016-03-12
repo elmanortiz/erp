@@ -17,7 +17,7 @@ class CtlEstado
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -31,9 +31,7 @@ class CtlEstado
     /**
      * @var \CtlPais
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="CtlPais")
+     * @ORM\ManyToOne(targetEntity="CtlPais")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ctl_pais_id", referencedColumnName="id")
      * })
@@ -41,19 +39,6 @@ class CtlEstado
     private $ctlPais;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return CtlEstado
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -94,7 +79,7 @@ class CtlEstado
      * @param \ERP\AdminBundle\Entity\CtlPais $ctlPais
      * @return CtlEstado
      */
-    public function setCtlPais(\ERP\AdminBundle\Entity\CtlPais $ctlPais)
+    public function setCtlPais(\ERP\AdminBundle\Entity\CtlPais $ctlPais = null)
     {
         $this->ctlPais = $ctlPais;
 
@@ -110,4 +95,7 @@ class CtlEstado
     {
         return $this->ctlPais;
     }
+     public function __toString() {
+  return $this->nombreEstado;
+}
 }

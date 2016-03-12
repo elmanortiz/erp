@@ -17,7 +17,7 @@ class RhFormacionAcademica
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -59,9 +59,7 @@ class RhFormacionAcademica
     /**
      * @var \RhPersona
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhPersona")
+     * @ORM\ManyToOne(targetEntity="RhPersona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_persona_id", referencedColumnName="id")
      * })
@@ -69,19 +67,6 @@ class RhFormacionAcademica
     private $rhPersona;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhFormacionAcademica
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -214,7 +199,7 @@ class RhFormacionAcademica
      * @param \ERP\AdminBundle\Entity\RhPersona $rhPersona
      * @return RhFormacionAcademica
      */
-    public function setRhPersona(\ERP\AdminBundle\Entity\RhPersona $rhPersona)
+    public function setRhPersona(\ERP\AdminBundle\Entity\RhPersona $rhPersona = null)
     {
         $this->rhPersona = $rhPersona;
 

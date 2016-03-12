@@ -17,7 +17,7 @@ class RhPuestoPerfil
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -59,9 +59,7 @@ class RhPuestoPerfil
     /**
      * @var \CtlDepartamentoEmpresa
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="CtlDepartamentoEmpresa")
+     * @ORM\ManyToOne(targetEntity="CtlDepartamentoEmpresa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ctl_departamento_empresa_id", referencedColumnName="id")
      * })
@@ -69,19 +67,6 @@ class RhPuestoPerfil
     private $ctlDepartamentoEmpresa;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhPuestoPerfil
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -214,7 +199,7 @@ class RhPuestoPerfil
      * @param \ERP\AdminBundle\Entity\CtlDepartamentoEmpresa $ctlDepartamentoEmpresa
      * @return RhPuestoPerfil
      */
-    public function setCtlDepartamentoEmpresa(\ERP\AdminBundle\Entity\CtlDepartamentoEmpresa $ctlDepartamentoEmpresa)
+    public function setCtlDepartamentoEmpresa(\ERP\AdminBundle\Entity\CtlDepartamentoEmpresa $ctlDepartamentoEmpresa = null)
     {
         $this->ctlDepartamentoEmpresa = $ctlDepartamentoEmpresa;
 

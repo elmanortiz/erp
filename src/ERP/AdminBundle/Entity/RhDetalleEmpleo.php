@@ -17,7 +17,7 @@ class RhDetalleEmpleo
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -45,9 +45,7 @@ class RhDetalleEmpleo
     /**
      * @var \RhPersona
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="RhPersona")
+     * @ORM\ManyToOne(targetEntity="RhPersona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="rh_persona_id", referencedColumnName="id")
      * })
@@ -57,9 +55,7 @@ class RhDetalleEmpleo
     /**
      * @var \CtlTipoEmpleo
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="CtlTipoEmpleo")
+     * @ORM\ManyToOne(targetEntity="CtlTipoEmpleo")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ctl_tipo_empleo_id", referencedColumnName="id")
      * })
@@ -67,19 +63,6 @@ class RhDetalleEmpleo
     private $ctlTipoEmpleo;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return RhDetalleEmpleo
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -166,7 +149,7 @@ class RhDetalleEmpleo
      * @param \ERP\AdminBundle\Entity\RhPersona $rhPersona
      * @return RhDetalleEmpleo
      */
-    public function setRhPersona(\ERP\AdminBundle\Entity\RhPersona $rhPersona)
+    public function setRhPersona(\ERP\AdminBundle\Entity\RhPersona $rhPersona = null)
     {
         $this->rhPersona = $rhPersona;
 
@@ -189,7 +172,7 @@ class RhDetalleEmpleo
      * @param \ERP\AdminBundle\Entity\CtlTipoEmpleo $ctlTipoEmpleo
      * @return RhDetalleEmpleo
      */
-    public function setCtlTipoEmpleo(\ERP\AdminBundle\Entity\CtlTipoEmpleo $ctlTipoEmpleo)
+    public function setCtlTipoEmpleo(\ERP\AdminBundle\Entity\CtlTipoEmpleo $ctlTipoEmpleo = null)
     {
         $this->ctlTipoEmpleo = $ctlTipoEmpleo;
 
