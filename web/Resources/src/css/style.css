@@ -67,3 +67,12 @@ a:hover{
 	background-color:  #ff3333;
 	border-color:  #ff3333;
 }
+/*========================  border div tab===================*/
+
+.border_tab {
+    /*
+  border-top-style: dashed;
+  border-right-style: double;
+  border-bottom-style: dotted;
+  border-left-style: solid;*/
+}
