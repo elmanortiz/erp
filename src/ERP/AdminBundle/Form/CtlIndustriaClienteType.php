@@ -15,7 +15,12 @@ class CtlIndustriaClienteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descripcion')
+            ->add('descripcion', null, array(
+                    'required'=>true,
+                   'attr'=>array(
+                    'class'=>'form-control',
+                       'style'=> 'width:25%;'
+                    )))
         ;
     }
     

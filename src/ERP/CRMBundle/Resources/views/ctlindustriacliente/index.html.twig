@@ -101,7 +101,7 @@
     
     <div class="col-md-10"  >
         <div id="formularioInsercionIndustria" style="margin-bottom: 40px;" >
-             {% include 'ERPCRMBundle:ctlterritorio:new.html.twig' %}
+             {% include 'ERPCRMBundle:ctlindustriacliente:new.html.twig' %}
             
         </div>
         
@@ -235,7 +235,7 @@
          
         $(".cancelar").on('click', function(e) {
             $(".insertar").show();
-            $("#formularioInsercionTerritorio").hide();
+            $("#formularioInsercionIndustria").hide();
              $(".guardar").hide();
              $(".cancelar").hide();
              
@@ -254,7 +254,7 @@
         
          //Modificacion
          $(".modificar").on('click', function(e) {
-                $("#formularioEdicionTerritorio").show();
+                $("#formularioEdicionIndustria").show();
                 $("#guardarModificacion").show();
                 $("#cancelarModificacion").show();
                 $("#insertar").hide();
@@ -265,7 +265,7 @@
         });  
         
         $("#cancelarModificacion").on("click",function (e){
-            $("#formularioEdicionTerritorio").hide();
+            $("#formularioEdicionIndustria").hide();
             $(".modificar").show();
             $(".insertar").show();
             $(".delete").show();
@@ -283,27 +283,27 @@
         
         
         //Eventos de los CheckBoxs para poder controlar los seleccionados
-         $(document).on('click',".idterritorio", function(e) {
+         $(document).on('click',".idindustria", function(e) {
              $(".guardar").hide();
              $(".cancelar").hide();
-             $("#formularioInsercionTerritorio").hide();
+             $("#formularioInsercionIndustria").hide();
               $(".insertar").show();
 
              var num =0;
 
-                    $('.idterritorio').each(
+                    $('.idindustria').each(
                        function (){
                         if($(this).prop("checked")){
                            num++;
                         }
-                      {#  console.log(num);#}
+                     
 
                        });
 
                     if(num == 0){
                             $(".modificar").hide(); 
                             $(".delete").hide();
-                            $("#formularioEdicionTerritorio").hide();
+                            $("#formularioEdicionIndustria").hide();
                             $("#cancelarModificacion").hide();
                             $("#guardarModificacion").hide();
                             $("#insertar").show();
@@ -315,15 +315,14 @@
                             
                           //Para editar 
                           var numero_edicion = $(this).attr("id");//El valor del id del chechboxs
-                          
-                          
-                          $("#formularioEdicionTerritorio").load(numero_edicion+"/edit");
+
+                          $("#formularioEdicionIndustria").load(numero_edicion+"/edit");
                             
                             
                          }else{
                              $(".modificar").hide();
                              $(".delete").show();
-                             $("#formularioEdicionTerritorio").hide();
+                             $("#formularioEdicionIndustria").hide();
                              $("#guardarModificacion").hide();
                              $("#cancelarModificacion").hide();
                          } 
@@ -336,7 +335,7 @@
             
             
   //Envento del search que hace que se escondan los botones cuando busco algo dentro del filtro
-            var table = $('#lista_territorios').DataTable();
+            var table = $('#lista_industrias').DataTable();
 
             table.on( 'search.dt', function () {
               $(".delete").hide();
@@ -349,14 +348,14 @@
                
                     if( $(this).is(':checked') ) {
                         $(".delete").show();
-                        var table = $('#lista_territorios').DataTable();
+                        var table = $('#lista_industrias').DataTable();
                         var rows = table.rows({ 'search': 'applied' }).nodes();
                         $('input[type="checkbox"]', rows).prop('checked', this.checked);
                         
                           
                    }else{
                        $(".delete").hide();
-                       var table = $('#lista_territorios').DataTable();
+                       var table = $('#lista_industrias').DataTable();
                         var rows = table.rows({ 'search': 'applied' }).nodes();
                         $('input[type="checkbox"]', rows).prop('checked', this.checked);
                        
@@ -390,7 +389,7 @@
                       
                         if(data.flag === 0) {
                             
-                            var table = $('#lista_territorios').DataTable();
+                            var table = $('#lista_industrias').DataTable();
  
                             table.ajax.reload( function ( json ) {
                                {# $('#myInput').val( json.lastInput );#}

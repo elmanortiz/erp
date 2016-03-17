@@ -14,7 +14,7 @@ use ERP\AdminBundle\Form\CtlIndustriaClienteType;
 /**
  * CtlIndustriaCliente controller.
  *
- * @Route("/admin/CRM/industriacliente")
+ * @Route("/admin/CRM/industria")
  */
 class CtlIndustriaClienteController extends Controller
 {
@@ -24,88 +24,106 @@ class CtlIndustriaClienteController extends Controller
      * @Route("/", name="industriacliente_index")
      * @Method("GET")
      */
-    public function indexAction()
+    
+    public function indexAction(Request $request )
     {
         $em = $this->getDoctrine()->getManager();
-
         $ctlIndustriaClientes = $em->getRepository('ERPAdminBundle:CtlIndustriaCliente')->findAll();
+        
+        //Esta parte es la que se agrega para poder mandar a llamar dentro de la vista un formulario
+        
+        $ctlIndustriaCliente = new CtlIndustriaCliente();
+        $form = $this->createForm('ERP\AdminBundle\Form\CtlIndustriaClienteType', $ctlIndustriaCliente);
+        $form->handleRequest($request);
+        
 
         return $this->render('ERPCRMBundle:ctlindustriacliente/index.html.twig', array(
+            'ctlIndustriaCliente' => $ctlIndustriaCliente,//Este es parte de lo que se manda a llamar dentro de la vista para poder ocupar el formulario externo
             'ctlIndustriaClientes' => $ctlIndustriaClientes,
+            'form' => $form->createView(),//Este es parte de lo que se manda a llamar dentro de la vista para poder ocupar el formulario externo
+        ));
+        
+        
+    }
+
+    /**
+     * Creates a new CtlIndustriaCliente entity.
+     *
+     * @Route("/new", name="industriacliente_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newAction(Request $request)
+    {
+        $ctlIndustriaCliente = new CtlIndustriaCliente();
+        $form = $this->createForm('ERP\AdminBundle\Form\CtlIndustriaClienteType', $ctlIndustriaCliente);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            //Seccion donde se setea el estado ya que fue un campo que se agrego despues del mapeo de la base de datos
+            $ctlIndustriaCliente->setEstado(1);
+            
+            $em->persist($ctlIndustriaCliente);
+            $em->flush();
+
+            return $this->redirectToRoute('industriacliente_index', array('id' => $ctlIndustriaCliente->getId()));
+        }
+
+        return $this->render('ERPCRMBundle:ctlindustriacliente/new.html.twig', array(
+            'ctlIndustriaCliente' => $ctlIndustriaCliente,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * Finds and displays a CtlIndustriaCliente entity.
+     *
+     * @Route("/{id}", name="industriacliente_show")
+     * @Method("GET")
+     */
+    public function showAction(CtlIndustriaCliente $ctlIndustriaCliente)
+    {
+        $deleteForm = $this->createDeleteForm($ctlIndustriaCliente);
+
+        return $this->render('ERPCRMBundle:ctlindustriacliente/show.html.twig', array(
+            'ctlIndustriaCliente' => $ctlIndustriaCliente,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+    
+    
+    
+    
+    
+
+    /**
+     * Displays a form to edit an existing CtlIndustriaCliente entity.
+     *
+     * @Route("/{id}/edit", name="industria_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, CtlIndustriaCliente $ctlIndustriaCliente)
+    {
+        $deleteForm = $this->createDeleteForm($ctlIndustriaCliente);
+        $editForm = $this->createForm('ERP\AdminBundle\Form\CtlIndustriaClienteType', $ctlIndustriaCliente);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($ctlIndustriaCliente);
+            $em->flush();
+
+           return $this->redirectToRoute('industriacliente_index', array('id' => $ctlIndustriaCliente->getId()) );
+        }
+
+        return $this->render('ERPCRMBundle:ctlindustriacliente/edit.html.twig', array(
+            'ctlIndustriaCliente' => $ctlIndustriaCliente,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
     }
     
 
-
-//    /**
-//     * Creates a new CtlIndustriaCliente entity.
-//     *
-//     * @Route("/new", name="admin_industriacliente_new")
-//     * @Method({"GET", "POST"})
-//     */
-//    public function newAction(Request $request)
-//    {
-//        $ctlIndustriaCliente = new CtlIndustriaCliente();
-//        $form = $this->createForm('ERP\AdminBundle\Form\CtlIndustriaClienteType', $ctlIndustriaCliente);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($ctlIndustriaCliente);
-//            $em->flush();
-//
-//            return $this->redirectToRoute('admin_industriacliente_show', array('id' => $ctlIndustriaCliente->getId()));
-//        }
-//
-//        return $this->render('ctlindustriacliente/new.html.twig', array(
-//            'ctlIndustriaCliente' => $ctlIndustriaCliente,
-//            'form' => $form->createView(),
-//        ));
-//    }
-//
-//    /**
-//     * Finds and displays a CtlIndustriaCliente entity.
-//     *
-//     * @Route("/{id}", name="admin_industriacliente_show")
-//     * @Method("GET")
-//     */
-//    public function showAction(CtlIndustriaCliente $ctlIndustriaCliente)
-//    {
-//        $deleteForm = $this->createDeleteForm($ctlIndustriaCliente);
-//
-//        return $this->render('ctlindustriacliente/show.html.twig', array(
-//            'ctlIndustriaCliente' => $ctlIndustriaCliente,
-//            'delete_form' => $deleteForm->createView(),
-//        ));
-//    }
-//
-//    /**
-//     * Displays a form to edit an existing CtlIndustriaCliente entity.
-//     *
-//     * @Route("/{id}/edit", name="admin_industriacliente_edit")
-//     * @Method({"GET", "POST"})
-//     */
-//    public function editAction(Request $request, CtlIndustriaCliente $ctlIndustriaCliente)
-//    {
-//        $deleteForm = $this->createDeleteForm($ctlIndustriaCliente);
-//        $editForm = $this->createForm('ERP\AdminBundle\Form\CtlIndustriaClienteType', $ctlIndustriaCliente);
-//        $editForm->handleRequest($request);
-//
-//        if ($editForm->isSubmitted() && $editForm->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($ctlIndustriaCliente);
-//            $em->flush();
-//
-//            return $this->redirectToRoute('admin_industriacliente_edit', array('id' => $ctlIndustriaCliente->getId()));
-//        }
-//
-//        return $this->render('ctlindustriacliente/edit.html.twig', array(
-//            'ctlIndustriaCliente' => $ctlIndustriaCliente,
-//            'edit_form' => $editForm->createView(),
-//            'delete_form' => $deleteForm->createView(),
-//        ));
-//    }
-//
 //    /**
 //     * Deletes a CtlIndustriaCliente entity.
 //     *
@@ -126,21 +144,22 @@ class CtlIndustriaClienteController extends Controller
 //        return $this->redirectToRoute('admin_industriacliente_index');
 //    }
 //
-//    /**
-//     * Creates a form to delete a CtlIndustriaCliente entity.
-//     *
-//     * @param CtlIndustriaCliente $ctlIndustriaCliente The CtlIndustriaCliente entity
-//     *
-//     * @return \Symfony\Component\Form\Form The form
-//     */
-//    private function createDeleteForm(CtlIndustriaCliente $ctlIndustriaCliente)
-//    {
-//        return $this->createFormBuilder()
-//            ->setAction($this->generateUrl('admin_industriacliente_delete', array('id' => $ctlIndustriaCliente->getId())))
-//            ->setMethod('DELETE')
-//            ->getForm()
-//        ;
-//    }
+    
+    /**
+     * Creates a form to delete a CtlIndustriaCliente entity.
+     *
+     * @param CtlIndustriaCliente $ctlIndustriaCliente The CtlIndustriaCliente entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(CtlIndustriaCliente $ctlIndustriaCliente)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('admin_industriacliente_delete', array('id' => $ctlIndustriaCliente->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
 
     
   /**

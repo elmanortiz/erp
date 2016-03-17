@@ -27,16 +27,12 @@ class CtlTerritorioController extends Controller
      public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
         $ctlTerritorios = $em->getRepository('ERPAdminBundle:CtlTerritorio')->findAll();
-        
-        
         $ctlTerritorio = new CtlTerritorio();
         $form = $this->createForm('ERP\AdminBundle\Form\CtlTerritorioType', $ctlTerritorio);
         $form->handleRequest($request);
 
-
-
+        
         
         return $this->render('ERPCRMBundle:ctlterritorio:index.html.twig', array(
             'ctlTerritorio' => $ctlTerritorio,
@@ -60,7 +56,10 @@ class CtlTerritorioController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            //Aqui esta la parte donde seteo un valor que se agregado a la base de datos de mas
             $ctlTerritorio->setEstado(1);   
+            
             $em->persist($ctlTerritorio);
             $em->flush();
 
@@ -72,6 +71,7 @@ class CtlTerritorioController extends Controller
             'form' => $form->createView(),
         ));
     }
+    
 
     /**
      * Finds and displays a CtlTerritorio entity.
