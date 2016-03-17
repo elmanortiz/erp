@@ -1,27 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>CtlTerritorio</h1>
+    <h1>CtlIndustriaCliente</h1>
 
     <table>
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ ctlTerritorio.id }}</td>
+                <td>{{ ctlIndustriaCliente.id }}</td>
             </tr>
             <tr>
-                <th>Nombre</th>
-                <td>{{ ctlTerritorio.nombre }}</td>
+                <th>Descripcion</th>
+                <td>{{ ctlIndustriaCliente.descripcion }}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('ctlterritorio_index') }}">Back to the list</a>
+            <a href="{{ path('admin_industriacliente_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('ctlterritorio_edit', { 'id': ctlTerritorio.id }) }}">Edit</a>
+            <a href="{{ path('admin_industriacliente_edit', { 'id': ctlIndustriaCliente.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

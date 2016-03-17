@@ -11,7 +11,7 @@
 			</div>
  {% endblock%}
  {% block acciones %}
-     	<div class="col-md-4" style="margin-top: 50px;">
+   {#  	<div class="col-md-4" style="margin-top: 50px;">
 				<!-- Boton Delete -->
 				<div class="btn-group pull-right">
 					<button class="btn btn-danger btn-sm" style="margin-left: 5px;" type="submit">Delete</button>
@@ -45,7 +45,7 @@
 				  </ul>
 				</div> 
 				<!-- Small button -->
-			</div>
+			</div>#}
      
  {% endblock %}
 		
@@ -59,9 +59,9 @@
 			<div class="col-md-2" style="border-right: 1px solid #f3f3f3;">
 				<!-- Left Navigation -->
 				<ul style="list-style: none; padding: 0;">
-                                    <a href="{{ path('admin_territorio_index') }}" class="leftnava"><li class="leftnav left">Menu<span class="pull-right right"></span></li></a>
-                                    <a href="{{ path('admin_territorio_configuracion') }}" class="leftnava"><li class="leftnav left active">Configuraci&oacute;n</li></a>
-                                    <a href="#" class="leftnava"><li class="leftnav left">Reportes</li></a>
+                                    <a href="{{ path('crm_dashbord') }}" class="leftnava"><li class="leftnav left">Menu<span class="pull-right right"></span></li></a>
+                                    <a href="{{ path('crm_configuracion') }}" class="leftnava"><li class="leftnav left active">Configuraci&oacute;n</li></a>
+                                   <a href="{{ path('crm_reportes') }}" class="leftnava"><li class="leftnav left">Reportes</li></a>
 				</ul>
 			</div>
        {% endblock %}
@@ -98,7 +98,7 @@
 				</div>
         <!-- Fin de Opcion de Modulo -->
          <!-- Incio de Opcion de Modulo -->
-				<div class="row module first">
+				<div class="row module first"><a href="{{ path('industriacliente_index') }}">
 					<div class="row">
 						<div class="col-md-10">
 							<p class="text-left" style="font-size: 17px; margin-top: 10px; margin-bottom: 0px;"><strong>Indusria</strong></p>
@@ -111,16 +111,18 @@
 				</div>
         <!-- Fin de Opcion de Modulo -->
       <!-- Incio de Opcion de Modulo -->
-				<div class="row module first">
+				<div class="row module first"><a href="{{ path('ctlterritorio_index2') }}">
 					<div class="row">
 						<div class="col-md-10">
-							<p class="text-left" style="font-size: 17px; margin-top: 10px; margin-bottom: 0px;"><strong>Territorio</strong></p>
+                                                    <p class="text-left" style="font-size: 17px; margin-top: 10px; margin-bottom: 0px;"><strong>Territorio</strong></p>
                                                         <p class="text-left" style="font-size: 12px; #8D99A6 !important;">Administracion de territorio</p>
 						</div>
 						<div class="col-md-2">
 							<p class="text-right" style="padding-right: 20px; padding-top: 10px; #8D99A6 !important;">Notificacion</p>
 						</div>
+                                                
 					</div>
+                                        </a>
 				</div>
         <!-- Fin de Opcion de Modulo -->
 
@@ -140,4 +142,5 @@
   
       
   {% endblock %} 
+
 

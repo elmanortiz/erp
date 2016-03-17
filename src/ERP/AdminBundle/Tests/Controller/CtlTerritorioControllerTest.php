@@ -1,6 +1,6 @@
 <?php
 
-namespace ERP\CRMBundle\Tests\Controller;
+namespace ERP\AdminBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -13,13 +13,13 @@ class CtlTerritorioControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/admin/territorio/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /admin/territorio/");
+        $crawler = $client->request('GET', '/ctlterritorio/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /ctlterritorio/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'erp_crmbundle_ctlterritorio[field_name]'  => 'Test',
+            'erp_adminbundle_ctlterritorio[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class CtlTerritorioControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Update')->form(array(
-            'erp_crmbundle_ctlterritorio[field_name]'  => 'Foo',
+            'erp_adminbundle_ctlterritorio[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

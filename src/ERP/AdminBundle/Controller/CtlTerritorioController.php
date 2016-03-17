@@ -1,6 +1,6 @@
 <?php
 
-namespace ERP\CRMBundle\Controller;
+namespace ERP\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,16 +14,18 @@ use ERP\AdminBundle\Form\CtlTerritorioType;
 /**
  * CtlTerritorio controller.
  *
- * @Route("/admin/CRM/configuracion/territorios")
+ * @Route("/admin2/CRM/configuracion/territorio")
  */
 class CtlTerritorioController extends Controller
 {
     /**
      * Lists all CtlTerritorio entities.
      *
-     * @Route("/", name="ctlterritorio_index2")
+     * @Route("/", name="ctlterritorio_index")
      * @Method({"GET","POST"})
      */
+
+    
      public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -36,9 +38,19 @@ class CtlTerritorioController extends Controller
         $form->handleRequest($request);
 
 
-
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($ctlTerritorio);
+//            $em->flush();
+//
+//            return $this->render('ctlterritorio/index.html.twig', array(
+//                'ctlTerritorio' => $ctlTerritorio,
+//                'ctlTerritorios' => $ctlTerritorios,
+//                'form' => $form->createView(),
+//            ));
+//        }
         
-        return $this->render('ERPCRMBundle:ctlterritorio:index.html.twig', array(
+        return $this->render('ctlterritorio/index.html.twig', array(
             'ctlTerritorio' => $ctlTerritorio,
             'ctlTerritorios' => $ctlTerritorios,
             'form' => $form->createView(),
@@ -64,10 +76,10 @@ class CtlTerritorioController extends Controller
             $em->persist($ctlTerritorio);
             $em->flush();
 
-            return $this->redirectToRoute('ctlterritorio_index2');
+            return $this->redirectToRoute('ctlterritorio_index');
         }
 
-        return $this->render('ERPCRMBundle:ctlterritorio/new.html.twig', array(
+        return $this->render('ctlterritorio/new.html.twig', array(
             'ctlTerritorio' => $ctlTerritorio,
             'form' => $form->createView(),
         ));
@@ -83,7 +95,7 @@ class CtlTerritorioController extends Controller
     {
         $deleteForm = $this->createDeleteForm($ctlTerritorio);
 
-        return $this->render('ERPCRMBundle:ctlterritorio/show.html.twig', array(
+        return $this->render('ctlterritorio/show.html.twig', array(
             'ctlTerritorio' => $ctlTerritorio,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -106,10 +118,10 @@ class CtlTerritorioController extends Controller
             $em->persist($ctlTerritorio);
             $em->flush();
 
-            return $this->redirectToRoute('ctlterritorio_index2' );
+            return $this->redirectToRoute('ctlterritorio_index' );
         }
 
-        return $this->render('ERPCRMBundle:ctlterritorio/edit.html.twig', array(
+        return $this->render('ctlterritorio/edit.html.twig', array(
             'ctlTerritorio'=> $ctlTerritorio,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -119,7 +131,7 @@ class CtlTerritorioController extends Controller
     /**
      * Deletes a CtlTerritorio entity.
      *
-     * @Route("/{id}", name="ctlterritorio_delete2")
+     * @Route("/{id}", name="ctlterritorio_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, CtlTerritorio $ctlTerritorio)
@@ -133,7 +145,7 @@ class CtlTerritorioController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('ctlterritorio_index2');
+        return $this->redirectToRoute('ctlterritorio_index');
     }
 
     /**
@@ -194,12 +206,11 @@ class CtlTerritorioController extends Controller
         $busqueda = $request->query->get('search');
         
         $em = $this->getDoctrine()->getEntityManager();
-        $territoriosTotal = $em->getRepository('ERPAdminBundle:CtlTerritorio')->findBy(array('estado'=>1));
+        $territoriosTotal = $em->getRepository('ERPAdminBundle:CtlTerritorio')->findAll();
         
-        $territorio['draw']=$draw++;  
+       $territorio['draw']=$draw++;  
         $territorio['recordsTotal'] = count($territoriosTotal);
         $territorio['recordsFiltered']= count($territoriosTotal);
-        
         $territorio['data']= array();
         //var_dump($busqueda);
         //die();
@@ -213,7 +224,7 @@ class CtlTerritorioController extends Controller
               //  if($row!=''){
                     
                     $dql = "SELECT ter.id, ter.nombre ,concat(concat('<input type=\"checkbox\" class=\"checkbox idterritorio\" id=\"',ter.id), '\">' as link FROM ERPAdminBundle:CtlTerritorio ter "
-                        . "WHERE upper(ter.nombre) LIKE upper(:busqueda) and ter.estado=1 "
+                        . "WHERE upper(ter.nombre) LIKE upper(:busqueda) "
                         . "ORDER BY ter.nombre DESC ";
                    $territorio['data'] = $em->createQuery($dql)
                             ->setParameters(array('busqueda'=>"%".$busqueda['value']."%"))
@@ -222,7 +233,7 @@ class CtlTerritorioController extends Controller
                    $territorio['recordsFiltered']= count($territorio['data']);
                     
                    $dql = "SELECT ter.id, ter.nombre,concat(concat('<input type=\"checkbox\" class=\"checkbox idterritorio\" id=\"',ter.id), '\">' as link FROM ERPAdminBundle:CtlTerritorio ter "
-                        . "WHERE upper(ter.nombre) LIKE upper(:busqueda) and ter.estado=1 "
+                        . "WHERE upper(ter.nombre) LIKE upper(:busqueda) "
                         . "ORDER BY ter.nombre DESC ";
                    
                    $territorio['data'] = $em->createQuery($dql)
@@ -230,7 +241,19 @@ class CtlTerritorioController extends Controller
                             ->setFirstResult($start)
                             ->setMaxResults($longitud)
                             ->getResult();
-       
+              //  }
+            //}
+                    //var_dump($paciente);
+
+    //                if($paciente['data']==null)
+    //                    $paciente['data']=$pacientePrimeraBusqueda;
+    //                else
+                    //array_push($paciente['data'], $paciente['data']);
+//                }
+//            }
+            
+            
+            //var_dump($paciente['data']);
         }
         else{
             $dql = "SELECT ter.id , ter.nombre ,concat(concat('<input type=\"checkbox\" class=\"checkbox idterritorio\" id=\"',ter.id), '\">' as link FROM ERPAdminBundle:CtlTerritorio ter "
@@ -240,7 +263,16 @@ class CtlTerritorioController extends Controller
                     ->setMaxResults($longitud)
                     ->getResult();
         }
-     
+        //$longitud = $request->query->get('length');
+        //var_dump($start);
+        
+        //var_dump(count($pacientesTotal));
+        
+        //$array = array("draw"=>23);
+//        $paciente['draw']=23;
+//        $paciente['recordsTotal']=57;
+//        $paciente['recordsFiltered']=57;
+        
         
         return new Response(json_encode($territorio));
     }
@@ -273,13 +305,40 @@ class CtlTerritorioController extends Controller
                 $em->flush();
                 
             }
-   
+            //die();
+            
+//            $em = $this->getDoctrine()->getManager();
+//            $detalleOrden = $em->getRepository('ERPAdminBundle:CtlTerritorio')->find($detalleId);
+//
+//            
+//            //var_dump($detalleOrden);
+//            $em->remove($detalleOrden);
+//            //die();
+//            $em->flush();
+//            
+//            $detalleOrdenRecalc = $em->getRepository('DGImpresionBundle:DetalleOrden')->findBy(array('orden'=>$ordenId));
+//            
+//            //var_dump(count($detalleOrdenRecalc));
+//            $total=0;
+//            if(count($detalleOrdenRecalc)!=0){
+//                foreach ($detalleOrdenRecalc as $row){
+//                    $total=$total+$row->getMonto();
+//                }
+//            }
+            //var_dump($total);
             $response->setData(array(
                             'flag' => 0,
                             
                     ));    
             return $response; 
-       
+        /*} else {    
+            $response->setData(array(
+                           'flag' => 1
+                    ));
+            return $response; 
+            
+        }*/
+        
         
         
         

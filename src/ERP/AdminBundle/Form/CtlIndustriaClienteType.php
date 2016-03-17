@@ -1,12 +1,12 @@
 <?php
 
-namespace ERP\CRMBundle\Form;
+namespace ERP\AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CtlTerritorioType extends AbstractType
+class CtlIndustriaClienteType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,7 +15,7 @@ class CtlTerritorioType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
+            ->add('descripcion')
         ;
     }
     
@@ -25,7 +25,7 @@ class CtlTerritorioType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ERP\CRMBundle\Entity\CtlTerritorio'
+            'data_class' => 'ERP\AdminBundle\Entity\CtlIndustriaCliente'
         ));
     }
 }

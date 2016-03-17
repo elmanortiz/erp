@@ -28,8 +28,18 @@ class CtlIndustriaCliente
      */
     private $descripcion;
 
-
-
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado", type="integer", nullable=false)
+     */
+    private $estado;
+    
+    
+    
+    
+    
     /**
      * Get id
      *
@@ -62,4 +72,32 @@ class CtlIndustriaCliente
     {
         return $this->descripcion;
     }
+    
+    
+     /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return CtlIndustriaCliente
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return integer 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+    
+    
+    
+    
 }

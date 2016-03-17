@@ -8,9 +8,9 @@ erp_rrhh:
     type:     annotation
     prefix:   /
 
-erpcrm:
-    resource: "@ERPCRMBundle/Controller/"
-    type:     annotation
+erpcrm: 
+    resource: "@ERPCRMBundle/Controller/" 
+    type:     annotation 
     prefix:   /
 
 app:

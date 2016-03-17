@@ -1,5 +1,4 @@
 {% extends ':Layout:layout2.html.twig' %}
-
 {% block css %}
     {{parent()}}
     <style>
@@ -9,14 +8,15 @@
         }
     </style>
 {% endblock css%}
+
 {% block descripcion_y_acciones %}
 
     
  <div class="row">
  {% block descripcion %}
 			<div class="col-md-8">
-				<p class="robo" style="font-weight: 300; margin-bottom: 0px; font-size: 30px;">Industria</p>
-                                <p class="robo" style="font-weight: 300; font-size: 14px; height: 40px;">Gesti&oacute;n de los nombres de las industias de nuestros clientes</p>
+				<p class="robo" style="font-weight: 300; margin-bottom: 0px; font-size: 30px;">Territorio</p>
+                                <p class="robo" style="font-weight: 300; font-size: 14px; height: 40px;">Gesti&oacute;n de los territorios de nuestros clientes y clientes potenciales.</p>
 			</div>
  {% endblock%}
  {% block acciones %}
@@ -97,15 +97,18 @@
             
        {% endblock %}
 
+
+
+
 {% block cuerpo %}
     
     <div class="col-md-10"  >
-        <div id="formularioInsercionIndustria" style="margin-bottom: 40px;" >
-             {% include 'ERPCRMBundle:ctlterritorio:new.html.twig' %}
+        <div id="formularioInsercionTerritorio" style="margin-bottom: 40px;" >
+              {% include 'ERPCRMBundle:ctlterritorio:new.html.twig' %}
             
         </div>
         
-        <div id="formularioEdicionIndustria" style="margin-bottom: 40px;" >
+        <div id="formularioEdicionTerritorio" style="margin-bottom: 40px;" >
               
             
         </div>
@@ -114,7 +117,7 @@
               
               <div >
       
-            <table id="lista_industrias" class="table table-bordered table-hover display dt-responsive dataTable no-footer" style="width: 99%;">
+            <table id="lista_territorios" class="table table-bordered table-hover display dt-responsive dataTable no-footer" style="width: 99%;">
         <thead>
             <tr>
                 
@@ -160,9 +163,12 @@
   
       <script  type="text/javascript">
           $(document).ready(function(){
-
-            $('#lista_industrias').DataTable({
-                      "pageLength": 20,
+             
+        
+            
+            
+            $('#lista_territorios').DataTable({
+                    "pageLength": 20,
                       "lengthMenu": [ 20 ],
                     "dom": "<'row'<'col-md-6 pull-left'p><'col-md-6 pull-right'f>>" +
                             "<'row'<'col-md-12'tr>>" +
@@ -170,24 +176,16 @@
                     "processing": true,
                     "serverSide": true,
                     "ajax": {
-                        "url": '{{path('admin_industria_data')}}',
+                        "url": '{{path('admin_territorio_data')}}',
                         "type": 'GET'
                     },
                     "columns": [
                          { "data": "link" },
-                        { "data": "descripcion" }
-              
+                        { "data": "nombre" }
+                      
                     ],
                     "columnDefs": [
                            { "orderable": false, "targets": 0 }
-                          {# { "orderable": false, "targets": 2 },
-                           { "orderable": false, "targets": 3 },
-                           { "orderable": false, "targets": 4 }#}
-                           {#{ "orderable": false, "targets": 5 },
-                           { "orderable": false, "targets": 6 }#}
-                           
-                           
-                           //{ "orderData": [ 2, 3, 4 ], "targets": 2 }
                     ],
                     "language": {
                     "info": "Mostrando página _PAGE_ de _PAGES_",
@@ -197,25 +195,24 @@
                         "next": "Siguiente",
                         "previous": "Anterior"
                     },
-                    "processing": "<h4>Procesando petición...</h4>",
-                    "search": "<b>Buscar registros:</b>",
+                    "processing": "Procesando petición...",
+                    "search": "Buscar registros:",
                     "lengthMenu": "Mostrar _MENU_ registros"
-                }
-              
+                },
                     
         });
 
 
         
-        $("#formularioInsercionIndustria").hide();
-         $("#formularioEdicionIndustria").hide();
+        $("#formularioInsercionTerritorio").hide();
+         $("#formularioEdicionTerritorio").hide();
         
         
         
         
         //Insercion
         $("#insertar").on('click', function(e) {
-              $("#formularioInsercionIndustria").show();
+              $("#formularioInsercionTerritorio").show();
               
                $(".guardar").show();
                $(".cancelar").show();
@@ -412,6 +409,12 @@
            });
            
            
+     
+
+
+           
+           
+     
 
          
         });
@@ -423,5 +426,3 @@
       
       
   {% endblock %} 
-
-
