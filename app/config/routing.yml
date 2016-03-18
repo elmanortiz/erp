@@ -7,6 +7,11 @@ erp_rrhh:
     resource: "@ERPRrhhBundle/Controller/"
     type:     annotation
     prefix:   /
+    
+erp_inventario:
+    resource: "@ERPInventarioBundle/Controller/"
+    type:     annotation
+    prefix:   /
 
 erpcrm: 
     resource: "@ERPCRMBundle/Controller/" 
