@@ -8,61 +8,61 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use ERP\AdminBundle\Entity\CtlTipoInventario;
-use ERP\AdminBundle\Form\CtlTipoInventarioType;
+use ERP\AdminBundle\Entity\InvProducto;
+use ERP\AdminBundle\Form\InvProductoType;
 
 /**
- * CtlPais controller.
+ * InvProducto controller.
  *
- * @Route("/admin/InventarioBundle/ctltipoinventario")
+ * @Route("/admin/InventarioBundle/invproducto")
  */
-class CtlTipoInventarioController extends Controller
+class InvProductoController extends Controller
 {
     /**
-     * Lists all CtlTipoInventario entities.
+     * Lists all InvProducto entities.
      *
-     * @Route("/", name="ctltipoinventario_index")
+     * @Route("/", name="invproducto_index")
      * @Method("GET")
      */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         
-        $ctlTipoInventario = new CtlTipoInventario(); //Es para poder poner el ingreso
-        $form = $this->createForm('ERP\AdminBundle\Form\CtlTipoInventarioType', $ctlTipoInventario); //Es para poder poner el ingreso
+        $invProducto = new InvProducto(); //Es para poder poner el ingreso
+        $form = $this->createForm('ERP\AdminBundle\Form\InvProductoType', $invProducto); //Es para poder poner el ingreso
         $form->handleRequest($request); //Es para poder poner el ingreso
         
-        $ctltipoinventario = $em->getRepository('ERPAdminBundle:CtlTipoInventario')->findAll();
-        return $this->render('ERPInventarioBundle:tipoinventario:index.html.twig', array(
-            'ctltipoinventario' => $ctltipoinventario,
+        $invproducto = $em->getRepository('ERPAdminBundle:InvProducto')->findAll();
+        return $this->render('ERPInventarioBundle:invproducto:index.html.twig', array(
+            'invproducto' => $invproducto,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Creates a new CtlTipoInventario entity.
+     * Creates a new InvProducto entity.
      *
-     * @Route("/new", name="ctltipoinventario_new")
+     * @Route("/new", name="invproducto_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
-        $ctlTipoInventario = new CtlTipoInventario();
-        $form = $this->createForm('ERP\AdminBundle\Form\CtlTipoInventarioType', $ctlTipoInventario);
+        $ctlInvProducto = new ctlInvProducto();
+        $form = $this->createForm('ERP\AdminBundle\Form\InvProductoType', $ctlInvProducto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $ctlTipoInventario->setEstado('1');
-            $em->persist($ctlTipoInventario);
+            $ctlInvProducto->setEstado('1');
+            $em->persist($ctlInvProducto);
             $em->flush();
 
 //            return $this->redirectToRoute('ctltipoinventario_index', array('id' => $ctlTipoInventario->getId()));
             return $this->redirectToRoute('ctltipoinventario_index');
         }
 
-        return $this->render('ERPInventarioBundle:tipoinventario:new.html.twig', array(
-            'ctlTipoInventario' => $ctlTipoInventario,
+        return $this->render('ERPInventarioBundle:invproducto:index.html.twig', array(
+            'ctlInvProducto' => $ctlInvProducto,
             'form' => $form->createView(),
         ));
     }
@@ -163,7 +163,7 @@ class CtlTipoInventarioController extends Controller
 	/* Array of database columns which should be read and sent back to DataTables. Use a space where
 	 * you want to insert a non-database field (for example a counter or static image)
 	 */
-        $entity = new CtlTipoInventario();
+        $entity = new InvProducto();
      
      
 //	
@@ -186,7 +186,7 @@ class CtlTipoInventarioController extends Controller
         $busqueda = $request->query->get('search');
         
         $em = $this->getDoctrine()->getEntityManager();
-        $territoriosTotal = $em->getRepository('ERPAdminBundle:CtlTerritorio')->findBy(array('estado'=>1));
+        $territoriosTotal = $em->getRepository('ERPAdminBundle:InvProducto')->findBy(array('estado'=>1));
         
         $territorio['draw']=$draw++;  
         $territorio['recordsTotal'] = count($territoriosTotal);
@@ -204,7 +204,7 @@ class CtlTipoInventarioController extends Controller
                 //var_dump($row);
               //  if($row!=''){
                     
-                    $dql = "SELECT tin.id, tin.nombre ,concat(concat('<input type=\"checkbox\" class=\"checkbox idterritorio\" id=\"',tin.id), '\">' as link FROM ERPAdminBundle:CtlTipoInventario tin "
+                    $dql = "SELECT tin.id, tin.nombre ,concat(concat('<input type=\"checkbox\" class=\"checkbox idterritorio\" id=\"',tin.id), '\">' as link FROM ERPAdminBundle:InvProducto tin "
                         . "WHERE upper(tin.nombre) LIKE upper(:busqueda) and tin.estado=1 "
                         . "ORDER BY tin.nombre DESC ";
                    $territorio['data'] = $em->createQuery($dql)
@@ -213,7 +213,7 @@ class CtlTipoInventarioController extends Controller
                     
                    $territorio['recordsFiltered']= count($territorio['data']);
                     
-                   $dql = "SELECT tin.id, tin.nombre,concat(concat('<input type=\"checkbox\" class=\"checkbox idterritorio\" id=\"',tin.id), '\">' as link FROM ERPAdminBundle:CtlTipoInventario tin "
+                   $dql = "SELECT tin.id, tin.nombre,concat(concat('<input type=\"checkbox\" class=\"checkbox idterritorio\" id=\"',tin.id), '\">' as link FROM ERPAdminBundle:InvProducto tin "
                         . "WHERE upper(tin.nombre) LIKE upper(:busqueda) and tin.estado=1 "
                         . "ORDER BY tin.nombre DESC ";
                    
@@ -225,7 +225,7 @@ class CtlTipoInventarioController extends Controller
        
         }
         else{
-            $dql = "SELECT tin.id , tin.nombre ,concat(concat('<input type=\"checkbox\" class=\"checkbox idterritorio\" id=\"',tin.id), '\">' as link FROM ERPAdminBundle:CtlTipoInventario tin "
+            $dql = "SELECT tin.id , tin.nombre ,concat(concat('<input type=\"checkbox\" class=\"checkbox idterritorio\" id=\"',tin.id), '\">' as link FROM ERPAdminBundle:InvProducto tin "
                 . " WHERE tin.estado=1 ORDER BY tin.nombre DESC ";
             $territorio['data'] = $em->createQuery($dql)
                     ->setFirstResult($start)
@@ -256,7 +256,7 @@ class CtlTipoInventarioController extends Controller
             
             foreach($id_territorio as $row){
                 $em = $this->getDoctrine()->getManager();
-                $detalleOrden = $em->getRepository('ERPAdminBundle:CtlTipoInventario')->find($row);
+                $detalleOrden = $em->getRepository('ERPAdminBundle:InvProducto')->find($row);
                 $detalleOrden->setEstado(0);
                 $em->persist($detalleOrden);
                 $em->flush();
@@ -267,9 +267,55 @@ class CtlTipoInventarioController extends Controller
                             'flag' => 0,
                             
                     ));    
-            return $response; 
-                    
+            return $response;                
     }
      
+    /**
+    * Ajax utilizado para insertar el formulario
+    *  
+    * @Route("/insert/form/product", name="insert_form_product")
+    */
+     public function createProductoAction(Request $request)
+    {
+       
+        $isAjax = $this->get('Request')->isXMLhttpRequest();
+        
+        if($isAjax){
+            $em = $this->getDoctrine()->getManager();    
+            $data = $request->request->get('request');
+            
+           $entity = new InvProducto();
+           $entity->setFecha(new \DateTime("now"));
+           $entity->setNombre($data[0]);
+           $entity->setDescripcion($data[1]);
+           $entity->setPrecioCompra($data[2]);
+           $entity->setPrecioVenta($data[3]);
+           $entity->setSku($data[4]);
+           $entity->setSerial($data[5]);
+           $entity->setInventarioBajo($data[6]);
+           $entity->setTotalExistencia($data[7]);
+           $zona = $em->getRepository('ERPAdminBundle:InvZona')->find($data[10]);
+           $entity->setInvZona($zona);
+           $catprod = $em->getRepository('ERPAdminBundle:CltCatProducto')->find($data[8]);
+           $entity->setInvCatProducto($catprod);
+           $tipoinv = $em->getRepository('ERPAdminBundle:CtlTipoInventario')->find($data[9]);
+           $entity->setInvTipoInventario($tipoinv);  
+           $entity->setEstado(1);
+           
+           $em->persist($entity);
+           $em->flush();
+           
+            $response = new JsonResponse();
+            $response->setData(array(
+                           'flag'       => 1
+                    ));
+
+            return $response;
+        } else {    
+            return new Response('0');              
+        }  
+    }
+    
     
 }
+//******************//

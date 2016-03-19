@@ -6,8 +6,8 @@
  <div class="row">
  {% block descripcion %}
 			<div class="col-md-8">
-				<p class="robo" style="font-weight: 300; margin-bottom: 0px; font-size: 30px;">Tipo de inventario</p>
-                                <p class="robo" style="font-weight: 300; font-size: 14px; height: 40px;">Gesti&oacute;n de los tipos de inventario para productos</p>
+				<p class="robo" style="font-weight: 300; margin-bottom: 0px; font-size: 30px;">Crear Producto</p>
+                                <p class="robo" style="font-weight: 300; font-size: 14px; height: 40px;">Gesti&oacute;n de productos de inventario</p>
 			</div>
  {% endblock%}
  {% block acciones %}
@@ -86,7 +86,7 @@
     
     <div class="col-md-10"  >
         <div id="formularioInsercionTerritorio" style="margin-bottom: 40px;" >
-              {% include 'ERPInventarioBundle:tipoinventario:new.html.twig' %}
+              {% include 'ERPInventarioBundle:invproducto:new.html.twig' %}
             
         </div>
         
@@ -400,9 +400,74 @@
                               
            });
            
-                   
-        });
-              
+           
+           $(".guardar").on('click', function(e) {
+                
+                
+           
+                    var data = new Array();
+                    var campos = new Array();
+                    //Primer Each me sirve para recorrer todos los text
+                     $(".invproductoTextBox").each(function(k, va) {
+                            var cadena = $(this).siblings().html() +"="+$(this).val();
+                            //campos['"'+cadena+'"']=$(this).val();
+                            //var keyValuePair = cadena.split("=");
+                            //campos[keyValuePair[0]]=keyValuePair[1];
+                            campos.push($(this).val());
+                     });
+
+                        //Primer Each me sirve para recorrer todos los select
+                      $(".invproductoSelect").each(function(k, va) {
+                            //campos[""+$(this).siblings().html()]=$(this).val();
+                            campos.push($(this).val());
+                     });
+                     data.push(campos);
+                     console.log(data);  
+
+                    var request2 = {
+                            request : campos
+                        };
+                    //console.log(request);
+                    $.ajax({
+                      data:request2,
+                      url:"{{path('insert_form_product')}}",
+                      type: "post",
+                      success: function(data){
+                        $("#formularioInsercionTerritorio").hide();
+                        $("#cancelar").hide();
+                        $("#guardar").hide();
+                        
+                        
+                        table.ajax.reload( function ( json ) {
+                               {# $('#myInput').val( json.lastInput );#}
+                            } );
+                        $("#insertar").show();
+                        //$("#formularioInsercionTerritorio").reset();
+                        
+                        
+                        //$("#inv_producto").parent().reset();
+                        //$('#inv_producto').parent().prop('name').reset();
+                        $('#inv_producto').parent().reset();
+                      },
+                      error: function(error){
+                          
+                      }
+                    });
+                
+            });  
+                    
+    });
+    
+    
+    
+    jQuery.fn.reset = function () {
+        $(this).each (function() { this.reset(); });
+      }
+         
+    $('#inv_producto').parent().each (function(){
+        this.reset();
+      });
+      
     </script>
     
 

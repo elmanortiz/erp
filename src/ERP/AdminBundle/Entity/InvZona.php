@@ -185,4 +185,9 @@ class InvZona
     {
         return $this->invSucursal;
     }
+    
+    public function __toString() {
+    //return $this->cargo ? $this->cargo : '';
+    return $this->getNombre();
+    }
 }

@@ -92,5 +92,10 @@ class CtlTipoInventario
         return $this->estado;
     }
     
+    public function __toString() {
+    //return $this->cargo ? $this->cargo : '';
+    return $this->getNombre();
+    }
+    
     
 }
