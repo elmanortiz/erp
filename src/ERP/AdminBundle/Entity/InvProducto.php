@@ -113,6 +113,12 @@ class InvProducto
      * })
      */
     private $invZona;
+    
+    /**
+    * @var integer
+    * @ORM\Column(name="estado", type="integer", nullable=false) 
+    */
+    private $estado;
 
 
 
@@ -400,5 +406,28 @@ class InvProducto
     public function getInvZona()
     {
         return $this->invZona;
+    }
+    
+    /**
+    * Set estado
+    *
+    * @param string $estado
+    * @return Estado
+    */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return integer 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 }

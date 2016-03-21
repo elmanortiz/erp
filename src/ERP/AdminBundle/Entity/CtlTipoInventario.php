@@ -27,6 +27,12 @@ class CtlTipoInventario
      * @ORM\Column(name="nombre", type="string", length=50, nullable=true)
      */
     private $nombre;
+    
+    /**
+    * @var integer
+    * @ORM\Column(name="estado", type="integer", nullable=false) 
+    */
+    private $estado;
 
 
 
@@ -62,4 +68,34 @@ class CtlTipoInventario
     {
         return $this->nombre;
     }
+    
+    /**
+    * Set estado
+    *
+    * @param string $estado
+    * @return CtlTipoInventario
+    */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return integer 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+    
+    public function __toString() {
+    //return $this->cargo ? $this->cargo : '';
+    return $this->getNombre();
+    }
+    
+    
 }
