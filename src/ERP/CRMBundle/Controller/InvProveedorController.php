@@ -155,7 +155,7 @@ class InvProveedorController extends Controller
     /**
      * 
      *
-     * @Route("/categoriacliente/data", name="invproveedor_data")
+     * @Route("/proveedor/data", name="invproveedor_data")
      */
     public function dataProveedorAction(Request $request)
     {
@@ -217,7 +217,7 @@ class InvProveedorController extends Controller
         }
         else{
             $dql = "SELECT pro.id , pro.nombre,pro.direccion ,ind.descripcion ,concat(concat('<input type=\"checkbox\" class=\"checkbox idproveedor\" id=\"',pro.id), '\">' as link FROM ERPAdminBundle:InvProveedor pro "
-                    . "JOIN pro.crmIndustriaCliente ind"
+                    . "JOIN pro.crmIndustriaCliente ind "
                 . " WHERE pro.estado=1 ORDER BY pro.nombre  DESC ";
             $territorio['data'] = $em->createQuery($dql)
                     ->setFirstResult($start)

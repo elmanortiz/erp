@@ -76,6 +76,14 @@ class CrmEmpresaCliente
      * @ORM\Column(name="correo", type="string", length=50, nullable=true)
      */
     private $correo;
+    
+    
+    /**
+     * @var integer
+     * @ORM\Column(name="estado", type="integer", nullable=false) 
+     */
+    private $estado;
+
 
 
 
@@ -272,4 +280,42 @@ class CrmEmpresaCliente
     {
         return $this->correo;
     }
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return CrmEmpresaCliente
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return integer 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
