@@ -43,7 +43,14 @@ class InvProveedor
      *   @ORM\JoinColumn(name="crm_industria_cliente_id", referencedColumnName="id")
      * })
      */
-    private $crmIndustriaCliente;
+        private $crmIndustriaCliente;
+    
+    
+    /**
+     * @var integer
+     * @ORM\Column(name="estado", type="integer", nullable=false) 
+     */
+    private $estado;
 
 
 
@@ -125,4 +132,37 @@ class InvProveedor
     {
         return $this->crmIndustriaCliente;
     }
+    
+    
+    
+    
+     /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return InvProveedor
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return integer 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+    
+    
+    
+    
+    
+    
+    
 }

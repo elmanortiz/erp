@@ -27,6 +27,18 @@ class CtlReferenciaCliente
      * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
      */
     private $nombre;
+    
+    
+    
+        
+    /**
+     * @var integer
+     * @ORM\Column(name="estado", type="integer", nullable=false) 
+     */
+    private $estado;
+
+    
+    
 
 
 
@@ -58,8 +70,40 @@ class CtlReferenciaCliente
      *
      * @return string 
      */
+    
+    
+    
+    
     public function getNombre()
     {
         return $this->nombre;
     }
+     
+     /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return CtlReferenciaCliente
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return integer 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+    
+    
+    
+    
+    
 }

@@ -27,7 +27,13 @@ class CtlEstadoClientePotencial
      * @ORM\Column(name="nombre", type="string", length=250, nullable=false)
      */
     private $nombre;
-
+    
+ /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado", type="integer", nullable=false)
+     */
+    private $estado;
 
 
     /**
@@ -62,4 +68,31 @@ class CtlEstadoClientePotencial
     {
         return $this->nombre;
     }
+    
+    
+    /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return CtlEstadoClientePotencial
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return integer 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+    
+    
+    
 }

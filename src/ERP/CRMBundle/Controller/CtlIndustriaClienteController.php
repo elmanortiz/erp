@@ -74,6 +74,9 @@ class CtlIndustriaClienteController extends Controller
             'form' => $form->createView(),
         ));
     }
+    
+    
+    
 
     /**
      * Finds and displays a CtlIndustriaCliente entity.
@@ -123,7 +126,8 @@ class CtlIndustriaClienteController extends Controller
         ));
     }
     
-
+    
+    
 //    /**
 //     * Deletes a CtlIndustriaCliente entity.
 //     *
@@ -152,6 +156,9 @@ class CtlIndustriaClienteController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
+    
+    
+    
     private function createDeleteForm(CtlIndustriaCliente $ctlIndustriaCliente)
     {
         return $this->createFormBuilder()
@@ -235,6 +242,40 @@ class CtlIndustriaClienteController extends Controller
         return new Response(json_encode($territorio));
     }
     
+    
+        
+    /**
+     * Displays a form to edit an existing Orden entity.
+     *
+     * @Route("/admin/CRM/configuracion/industria/eliminar", name="delete_industria")
+     */
+    public function deleteIndustriaAction()
+    {
+        
+        $isAjax = $this->get('Request')->isXMLhttpRequest();
+        $response = new JsonResponse();
+            $id_industria = $this->get('request')->request->get('id_industria');
+//           
+            
+            foreach($id_industria as $row){
+                $em = $this->getDoctrine()->getManager();
+                $detalleOrden = $em->getRepository('ERPAdminBundle:CtlIndustriaCliente')->find($row);
+                $detalleOrden->setEstado(0);
+                $em->persist($detalleOrden);
+                $em->flush();
+                
+            }
+   
+            $response->setData(array(
+                            'flag' => 0,
+                            
+                    ));    
+            return $response; 
+       
+        
+        
+        
+    }
     
     
     
