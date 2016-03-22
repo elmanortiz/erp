@@ -32,6 +32,8 @@ class RhPersonaController extends Controller
             'rhPersonas' => $rhPersonas,
         ));
     }
+    
+    
 
     /**
      * Creates a new RhPersona entity.

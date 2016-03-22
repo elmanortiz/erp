@@ -161,7 +161,7 @@ class CtlSucursal
      * Set correoelectronico
      *
      * @param string $correoelectronico
-     * @return CtlSucursal
+     * @return CtlSucursal{% extends 'base.html.twig' %}
      */
     public function setCorreoelectronico($correoelectronico)
     {
@@ -248,4 +248,7 @@ class CtlSucursal
     {
         return $this->ctlEmpresa;
     }
+     public function __toString() {
+  return $this->nombreSucursal;
+}
 }

@@ -7,7 +7,7 @@
  {% block descripcion %}
 			<div class="col-md-8">
 				<p class="robo" style="font-weight: 300; margin-bottom: 0px; font-size: 30px;">Empleado</p>
-                                <p class="robo" style="font-weight: 300; font-size: 14px; height: 40px;">Gesti&oacute;n de emleados.</p>
+                                <p class="robo" style="font-weight: 300; font-size: 14px; height: 40px;">Gesti&oacute;n de empleados.</p>
 			</div>
  {% endblock%}
  {% block acciones %}
@@ -72,11 +72,29 @@
 
 {% block cuerpo %}
     <div class="col-md-10">
-
+ <div class="form-group">
+                                        <label class="">
+                                            <div class="icheckbox_minimal checked" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="minimal" checked="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                                        </label>
+                                        <label class="">
+                                            <div class="icheckbox_minimal" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="minimal" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                                        </label>
+                                        <label>
+                                            <div class="icheckbox_minimal disabled" aria-checked="false" aria-disabled="true" style="position: relative;"><input type="checkbox" class="minimal" disabled="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                                            Minimal skin checkbox
+                                        </label>
+                                    </div>
+        
+        
+                
     <table id="listaProveedores">
         <thead>
             <tr>
-               
+                <th>
+                <label class="">
+                  <div class="icheckbox_minimal-blue " aria-checked="true" aria-disabled="false" style="position: relative;"><input type="checkbox" class="minimal" checked="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                </label>
+                </th>
                 <th>Nombre completo</th>
                
                
@@ -87,9 +105,11 @@
         </thead>
         <tbody>
         {% for rhPersona in rhPersonas %}
+    
             <tr>
-               <!-- <td><a href="{#{ path('rhpersona_show', { 'id': rhPersona.id }) }}">{{ rhPersona.id }#}</a></td>-->
-                <td>{{ rhPersona.nombres ~' '~ rhPersona.apellido }}</td>
+                
+               <td><a href="{{ path('rhpersona_show', { 'id': rhPersona.id }) }}"></a></td>
+                <td> <a href="{{ path('rhpersona_edit', { 'id': rhPersona.id }) }}">{{ rhPersona.nombres ~' '~ rhPersona.apellido }}</a></td>
                 <!-- 
                 <td>{#% if rhPersona.fechaIngreso %}{{ rhPersona.fechaIngreso|date('Y-m-d') }}{% endif %}</td>
                 <td>{% if rhPersona.fechaNacimiento %}{{ rhPersona.fechaNacimiento|date('Y-m-d') }}{% endif %}</td>
@@ -121,8 +141,11 @@
 
   
       <script  type="text/javascript">
+          
+    
+    
           $(document).ready(function(){
-             
+          
             $('#listaProveedores').DataTable();
         });
         

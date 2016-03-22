@@ -95,4 +95,7 @@ class CtlDepartamentoEmpresa
     {
         return $this->ctlSucursal;
     }
+         public function __toString() {
+  return $this->departamentoEmpresacol;
+}
 }
