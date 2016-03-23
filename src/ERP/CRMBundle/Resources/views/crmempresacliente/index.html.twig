@@ -442,6 +442,15 @@ var numero_edicion =0;
  //Eliminar desde la seleccion de los checkboxs
 //Funcion que prepara el array con todos los id que quiero inabilitar o eliminar
            $(".delete").on("click",function (){
+             $(".guardar").hide();
+             $(".cancelar").hide();
+             $("#formularioInsercion").hide();
+             $(".insertar").show();
+               
+                 $("#formularioEdicion").hide();   
+                $("#guardarModificacion").hide();
+                $("#cancelarModificacion").hide();
+                $(".insertar").show(); 
                
                var valor = new Array();
                $(".idempresa").each(function (index,value){

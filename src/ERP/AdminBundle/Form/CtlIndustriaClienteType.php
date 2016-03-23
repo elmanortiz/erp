@@ -16,11 +16,8 @@ class CtlIndustriaClienteType extends AbstractType
     {
         $builder
             ->add('descripcion', null, array(
-                    'required'=>true,
-                   'attr'=>array(
-                    'class'=>'form-control',
-                       'style'=> 'width:25%;'
-                    )))
+                'label'=>'Nombre de la industria'
+            ))
         ;
     }
     

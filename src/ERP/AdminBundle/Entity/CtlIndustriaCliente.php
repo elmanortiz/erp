@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CtlIndustriaCliente
  *
  * @ORM\Table(name="ctl_industria_cliente")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ERP\CRMBundle\Repository\CtlIndustriaClienteRepository")
  */
 class CtlIndustriaCliente
 {

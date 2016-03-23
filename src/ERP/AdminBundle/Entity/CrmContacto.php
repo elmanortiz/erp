@@ -69,6 +69,52 @@ class CrmContacto
      * @ORM\Column(name="puesto", type="string", length=50, nullable=true)
      */
     private $puesto;
+    
+    
+    
+    
+    /**
+     * @var \InvProveedor
+     *
+     * @ORM\ManyToOne(targetEntity="InvProveedor")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="inv_proveedor_id", referencedColumnName="id")
+     * })
+     */
+    private $contactoProveedorId;
+    
+    
+    
+    /**
+     * @var \CrmClientePotencial
+     *
+     * @ORM\ManyToOne(targetEntity="CrmClientePotencial")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="crm_cliente_potencial_id", referencedColumnName="id")
+     * })
+     */
+    private $contactoClientePotencialId;
+    
+    
+    
+     
+    /**
+     * @var \CrmCliente
+     *
+     * @ORM\ManyToOne(targetEntity="CrmCliente")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="crm_cliente_id", referencedColumnName="id")
+     * })
+     */
+    private $contactoClienteId;
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
@@ -242,4 +288,93 @@ class CrmContacto
     {
         return $this->puesto;
     }
+    
+    
+    
+      /**
+     * Set contactoProveedorId
+     *
+     * @param \ERP\AdminBundle\Entity\InvProveedor $contactoProveedorId
+     * @return CrmContacto
+     */
+    public function setContactoProveedorId(\ERP\AdminBundle\Entity\InvProveedor $contactoProveedorId = null)
+    {
+        $this->contactoProveedorId = $contactoProveedorId;
+
+        return $this;
+    }
+
+    /**
+     * Get contactoProveedorId
+     *
+     * @return \ERP\AdminBundle\Entity\InvProveedor 
+     */
+    public function getContactoProveedorId()
+    {
+        return $this->contactoProveedorId;
+    }
+    
+    
+
+    
+      /**
+     * Set contactoClientePotencialId
+     *
+     * @param \ERP\AdminBundle\Entity\CrmClientePotencial $contactoClientePotencialId
+     * @return CrmContacto
+     */
+    public function setContactoClientePotencialId(\ERP\AdminBundle\Entity\CrmClientePotencial $contactoClientePotencialId = null)
+    {
+        $this->contactoClientePotencialId = $contactoClientePotencialId;
+
+        return $this;
+    }
+
+    /**
+     * Get contactoClientePotencialId
+     *
+     * @return \ERP\AdminBundle\Entity\CrmClientePotencial 
+     */
+    public function getContactoClientePotencialId()
+    {
+        return $this->contactoClientePotencialId;
+    }
+
+    
+    
+     /**
+     * Set contactoClienteId
+     *
+     * @param \ERP\AdminBundle\Entity\CrmCliente contactoClienteId
+     * @return CrmContacto
+     */
+    public function setContactoClienteId(\ERP\AdminBundle\Entity\CrmCliente $contactoClienteId = null)
+    {
+        $this->contactoClienteId = $contactoClienteId;
+
+        return $this;
+    }
+
+    /**
+     * Get contactoClienteId
+     *
+     * @return \ERP\AdminBundle\Entity\CrmCliente 
+     */
+    public function getContactoClienteId()
+    {
+        return $this->contactoClienteId;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

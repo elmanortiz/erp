@@ -54,8 +54,21 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+#        naming_strategy: doctrine.orm.naming_strategy.underscore
+#        auto_mapping: true
+        entity_managers:
+            default:
+                connection:       default
+                mappings:
+                    ERPAdminBundle: ~
+                dql:
+                    datetime_functions:
+                        DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
+                        DAY: DoctrineExtensions\Query\Mysql\Day
+                        MONTH: DoctrineExtensions\Query\Mysql\Month
+                        YEAR: DoctrineExtensions\Query\Mysql\Year
+
+
 
 # Swiftmailer Configuration
 swiftmailer:

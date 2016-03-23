@@ -66,8 +66,8 @@
  <div class="row">
  {% block descripcion %}
 			<div class="col-md-8">
-				<p class="robo" style="font-weight: 300; margin-bottom: 0px; font-size: 30px;">Proveedores</p>
-                                <p class="robo" style="font-weight: 300; font-size: 14px; height: 40px;">Gesti&oacute;n  de proveedores</p>
+				<p class="robo" style="font-weight: 300; margin-bottom: 0px; font-size: 30px;">Industria</p>
+                                <p class="robo" style="font-weight: 300; font-size: 14px; height: 40px;">Gesti&oacute;n  de Industria</p>
 			</div>
  {% endblock%}
  {% block acciones %}
@@ -210,7 +210,9 @@
 
   
       <script  type="text/javascript">
+         
           $(document).ready(function(){
+  var numero_edicion = 0;
 
             $('#lista_industrias').DataTable({
                       "pageLength": 20,
@@ -297,7 +299,7 @@
             
         $(".guardar").on('click', function(e) {
                 
-                $("#submitInsertar").click();
+               insertarDatos();
 
         });   
         //Termina la insercion
@@ -326,7 +328,7 @@
         });
         
         $("#guardarModificacion").on("click",function (e){
-          $("#submitEditar").click();  
+          modificarDatos();
             
             
         });
@@ -365,7 +367,7 @@
                           
                             
                           //Para editar 
-                          var numero_edicion = $(this).attr("id");//El valor del id del chechboxs
+                           numero_edicion = $(this).attr("id");//El valor del id del chechboxs
 
                           $("#formularioEdicionIndustria").load(numero_edicion+"/edit");
                             
@@ -418,6 +420,11 @@
            //Funcion que prepara el array con todos los id que quiero inabilitar o eliminar
            $(".delete").on("click",function (){
                
+                $("#formularioEdicionIndustria").hide();   
+                $("#guardarModificacion").hide();
+                $("#cancelarModificacion").hide();
+                $(".insertar").show(); 
+               
                var valor = new Array();
                $(".idindustria").each(function (index,value){
                    
@@ -462,11 +469,162 @@
                
                
            });
+         //Ingresar los registros por medio de ajax
+         
+         //Funcion ajax para guardar en tiempo real
+           
+        function insertarDatos(){
+           
+            var data = new Array();
+            var campos = new Array();
+            //Primer Each me sirve para recorrer todos los text
+             $(".industriaTextBox").each(function(k, va) {
+                    var cadena = $(this).siblings().html() +"="+$(this).val();
+                    campos.push($(this).val());
+             });
+           
+             data.push(campos);
+             console.log(data);  
+                    
+          var request2 = {
+                    request : campos
+                };
+           
+
+            $.ajax({
+              data:request2,
+              url:"{{path('insert_industria')}}",
+              type: "post",
+              
+              success: function (data) {
+                        var retorno =data.flag;
+                       if(retorno==1){
+                           
+                           $("#formularioInsercionIndustria").hide();
+                              $(".guardar").hide();
+                              $(".cancelar").hide();
+                              $(".insertar").show();
+                              $(".industriaTextBox").val("");
+                             
+                              
+                            var table = $('#lista_industrias').DataTable();
+                            table.ajax.reload( function ( json ) {
+                               
+                            });
+                           Lobibox.notify("success", {
+                                        size: 'mini',
+                                        msg: 'Datos ingresados con exito'
+                                    });
+                            
+                       }else
+                            {
+                                  Lobibox.notify("success", {
+                                        size: 'mini',
+                                        msg: retorno
+                                    });
+                            }
+                       
+                    },
+              error: function (data) {
+                     
+                          
+                            Lobibox.notify("error", {
+                                        size: 'mini',
+                                        msg: 'Los datos no fueron ingresados, intente más tarde. Si el error persiste pongase en contacto con el administrador del sistema.'
+                                    });
+                       
+                    }      
+                     
+              
+            });
+            
+            
+            
+	}
+        
+   //Funcion para poder modificar los datos por medio de ajax  
+        
+        function modificarDatos(){
+                    
+            var data = new Array();
+            var campos = new Array();
+            //Primer Each me sirve para recorrer todos los text
+            campos.push(numero_edicion);
+             $(".industriaTextBoxEdit").each(function(k, va) {
+                    var cadena = $(this).siblings().html() +"="+$(this).val();
+                    campos.push($(this).val());
+             });
+             
+           
+             
+             data.push(campos);
+             console.log(data);  
+                    
+           var request2 = {
+                    request : campos
+                };
+                console.log(campos);
+                
+                
+            $.ajax({
+              data:request2,
+              url:"{{path('edit_industria')}}",
+              type: "post",
+              
+              
+              success: function (data) {
+                        var retorno = data.flag;
+                       if(retorno==1){
+                           
+                           $("#formularioEdicionIndustria").hide();
+                           $("#cancelarModificacion").hide();
+                           $("#guardarModificacion").hide();
+                           $(".insertar").show();
+                           $(".clienteTextBoxEdit").val("");
+                              
+                              
+                            var table = $('#lista_industrias').DataTable();
+                            table.ajax.reload( function ( json ) {
+                               
+                            });
+                           Lobibox.notify("success", {
+                                        size: 'mini',
+                                        msg: 'Datos modificados con exito'
+                                    });
+                            
+                       }else
+                            {
+                                  Lobibox.notify("success", {
+                                        size: 'mini',
+                                        msg: retorno
+                                    });
+                            }
+                       
+                    },
+              error: function (data) {
+                           
+                          
+                                    Lobibox.notify("error", {
+                                        size: 'mini',
+                                        msg: 'Los datos no fueron modificados, intente más tarde. Si el error persiste pongase en contacto con el administrador del sistema.'
+                                    });
+                       
+                    }      
+                    
+                    
+                    
+              
+            });
+               
+               
+        
+        }      
+        
            
            
 
          
-        });
+});
         
         
         

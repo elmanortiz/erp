@@ -16,11 +16,8 @@ class CtlTerritorioType extends AbstractType
     {
         $builder
            ->add('nombre', null, array(
-                    'required'=>true,
-                   'attr'=>array(
-                    'class'=>'form-control',
-                       'style'=> 'width:25%;'
-                    )))
+               'label'=>'Nombre'
+                 ))
 
         ;
     }

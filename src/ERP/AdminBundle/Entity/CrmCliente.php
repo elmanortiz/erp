@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CrmCliente
  *
  * @ORM\Table(name="crm_cliente", indexes={@ORM\Index(name="fk_cliente_categoria_cliente1_idx", columns={"categoria_cliente_id"}), @ORM\Index(name="fk_cliente_territorio1_idx", columns={"territorio_id"}), @ORM\Index(name="fk_cliente_cliente_potencial1_idx", columns={"cliente_potencial_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ERP\CRMBundle\Repository\CrmClienteRepository")
  */
 class CrmCliente
 {
@@ -78,6 +78,13 @@ class CrmCliente
      * })
      */
     private $territorio;
+    
+    
+     /**
+     * @var integer
+     * @ORM\Column(name="estado", type="integer", nullable=false) 
+     */
+    private $estado;
 
 
 
@@ -251,4 +258,43 @@ class CrmCliente
     {
         return $this->territorio;
     }
+    
+    
+    
+    /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return CrmCliente
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return integer 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+    
+    
+   
+    public function __toString() {
+        
+         return $this->nombreCompleto;
+    }  
+    
+    
+    
+    
+    
+    
+    
 }

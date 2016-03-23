@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * InvProveedor
  *
  * @ORM\Table(name="inv_proveedor", indexes={@ORM\Index(name="fk_inv_proveedor_crm_industria_cliente1_idx", columns={"crm_industria_cliente_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ERP\CRMBundle\Repository\InvProveedorRepository")
  */
 class InvProveedor
 {
@@ -158,7 +158,13 @@ class InvProveedor
     {
         return $this->estado;
     }
+   
     
+    
+    public function __toString() {
+        
+         return $this->nombre;
+    } 
     
     
     

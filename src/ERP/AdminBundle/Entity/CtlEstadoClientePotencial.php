@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CtlEstadoClientePotencial
  *
  * @ORM\Table(name="ctl_estado_cliente_potencial")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ERP\CRMBundle\Repository\CtlEstadoClientePotencialRepository")
  */
 class CtlEstadoClientePotencial
 {
@@ -91,6 +91,12 @@ class CtlEstadoClientePotencial
     public function getEstado()
     {
         return $this->estado;
+    }
+    
+    
+    public function __toString() {
+        
+         return $this->nombre;
     }
     
     

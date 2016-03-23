@@ -113,7 +113,7 @@ class CrmClientePotencial
     /**
      * @var \Usuario
      *
-     * @ORM\ManyToOne(targetEntity="Usuario")
+     * @ORM\ManyToOne(targetEntity="CtlUsuario")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_usuario_siguiente_contacto", referencedColumnName="id")
      * })
@@ -123,7 +123,7 @@ class CrmClientePotencial
     /**
      * @var \Usuario
      *
-     * @ORM\ManyToOne(targetEntity="Usuario")
+     * @ORM\ManyToOne(targetEntity="CtlUsuario")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_usuario_propietario", referencedColumnName="id")
      * })
@@ -140,6 +140,18 @@ class CrmClientePotencial
      */
     private $crmEmpresaCliente;
 
+    
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="sector_mercado", type="string", length=50, nullable=true)
+     */
+    private $sector_mercado;
+    
+    
+    
+    
 
 
     /**
@@ -411,7 +423,7 @@ class CrmClientePotencial
      * @param \ERP\AdminBundle\Entity\Usuario $idUsuarioSiguienteContacto
      * @return CrmClientePotencial
      */
-    public function setIdUsuarioSiguienteContacto(\ERP\AdminBundle\Entity\Usuario $idUsuarioSiguienteContacto = null)
+    public function setIdUsuarioSiguienteContacto(\ERP\AdminBundle\Entity\CtlUsuario $idUsuarioSiguienteContacto = null)
     {
         $this->idUsuarioSiguienteContacto = $idUsuarioSiguienteContacto;
 
@@ -434,7 +446,7 @@ class CrmClientePotencial
      * @param \ERP\AdminBundle\Entity\Usuario $idUsuarioPropietario
      * @return CrmClientePotencial
      */
-    public function setIdUsuarioPropietario(\ERP\AdminBundle\Entity\Usuario $idUsuarioPropietario = null)
+    public function setIdUsuarioPropietario(\ERP\AdminBundle\Entity\CtlUsuario $idUsuarioPropietario = null)
     {
         $this->idUsuarioPropietario = $idUsuarioPropietario;
 
@@ -451,6 +463,9 @@ class CrmClientePotencial
         return $this->idUsuarioPropietario;
     }
 
+    
+    
+    
     /**
      * Set crmEmpresaCliente
      *
@@ -473,4 +488,45 @@ class CrmClientePotencial
     {
         return $this->crmEmpresaCliente;
     }
+    
+    
+    
+    
+    
+    
+     /**
+     * Set sector_mercado
+     *
+     * @param string $sector_mercado
+     * @return CrmClientePotencial
+     */
+    public function setSectorMercado($sector_mercado)
+    {
+        $this->sector_mercado = $sector_mercado;
+
+        return $this;
+    }
+
+    /**
+     * Get sector_mercado
+     *
+     * @return string 
+     */
+    public function getSectorMercado()
+    {
+        return $this->sector_mercado;
+    }
+    
+    
+   public function __toString() {
+        
+         return $this->nombre;
+   }
+    
+    
+    
+    
+    
+    
+    
 }

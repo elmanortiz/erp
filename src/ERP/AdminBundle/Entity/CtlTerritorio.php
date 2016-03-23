@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CtlTerritorio
  *
  * @ORM\Table(name="ctl_territorio")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ERP\CRMBundle\Repository\CtlTerritorioRepository")
  */
 class CtlTerritorio
 {
@@ -95,7 +95,10 @@ class CtlTerritorio
         return $this->estado;
     }
     
-    
+     public function __toString() {
+        
+         return $this->nombre;
+    }
     
     
     

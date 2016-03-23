@@ -232,4 +232,13 @@ class CtlUsuario
     {
         return $this->ctlRol;
     }
+    
+    public function __toString() {
+        
+         return $this->username;
+    }
+    
+    
+    
+    
 }

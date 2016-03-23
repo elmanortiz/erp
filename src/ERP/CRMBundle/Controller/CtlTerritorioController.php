@@ -285,6 +285,76 @@ class CtlTerritorioController extends Controller
         
     }
     
+/**
+    * Ajax utilizado para buscar el precio del atributo seleccionado
+    *  
+    * @Route("/attributes/insert/clientepotencial", name="insert_territorio")
+    */
+    public function insertarDatos(Request $request)
+    {
+       
+        $isAjax = $this->get('Request')->isXMLhttpRequest();
+        $response = new JsonResponse();
+        if($isAjax){
+            $em = $this->getDoctrine()->getManager();    
+            $data = $request->request->get('request');
+            
+           $entity = new CtlTerritorio();
+           $entity->setNombre($data[0]);
+           $entity->setEstado(1);
+            
+            $em->persist($entity);
+            $em->flush();
+                $response->setData(array(
+                           'flag'       => 1
+                    )); 
+                return $response;
+
+            
+        } 
+        else {    
+            
+            $response->setData(array(
+                           'flag'       => $mensaje
+                    ));  
+            return $response; 
+        }  
+    } 
+  
+    
+  /**
+    * Ajax utilizado para buscar el precio del atributo seleccionado
+    *  
+    * @Route("/attributes/edit/cliente", name="edit_territorio")
+    */
+    public function editarDatos(Request $request)
+    {
+       
+        $isAjax = $this->get('Request')->isXMLhttpRequest();
+        $response = new JsonResponse();
+        if($isAjax){
+            $em = $this->getDoctrine()->getManager();    
+            $data = $request->request->get('request');
+            $entity = $em->getRepository('ERPAdminBundle:CtlTerritorio')->find($data[0]);
+            $entity->setNombre($data[1]);
+            $em->merge($entity);
+            $em->flush();
+            $response->setData(array(
+                           'flag'       => 1
+                    )); 
+
+                
+                
+        } else {    
+            
+            $response->setData(array(
+                           'flag'       => $mensaje
+                    ));  
+            
+        }  
+        return $response; 
+    }
+    
     
     
     

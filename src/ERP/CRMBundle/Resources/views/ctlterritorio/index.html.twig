@@ -66,8 +66,8 @@
  <div class="row">
  {% block descripcion %}
 			<div class="col-md-8">
-				<p class="robo" style="font-weight: 300; margin-bottom: 0px; font-size: 30px;">Proveedores</p>
-                                <p class="robo" style="font-weight: 300; font-size: 14px; height: 40px;">Gesti&oacute;n  de proveedores</p>
+				<p class="robo" style="font-weight: 300; margin-bottom: 0px; font-size: 30px;">Territorios</p>
+                                <p class="robo" style="font-weight: 300; font-size: 14px; height: 40px;">Gesti&oacute;n  de Territorios</p>
 			</div>
  {% endblock%}
  {% block acciones %}
@@ -294,7 +294,7 @@
             
         $(".guardar").on('click', function(e) {
                 
-                $("#submitInsertar").click();
+            insertarDatos();
 
         });   
         //Termina la insercion
@@ -323,7 +323,7 @@
         });
         
         $("#guardarModificacion").on("click",function (e){
-          $("#submitEditar").click();  
+            modificarDatos();
             
             
         });
@@ -362,7 +362,7 @@
                           
                             
                           //Para editar 
-                          var numero_edicion = $(this).attr("id");//El valor del id del chechboxs
+                          numero_edicion = $(this).attr("id");//El valor del id del chechboxs
                           
                           
                           $("#formularioEdicionTerritorio").load(numero_edicion+"/edit");
@@ -416,6 +416,11 @@
            //Funcion que prepara el array con todos los id que quiero inabilitar o eliminar
            $(".delete").on("click",function (){
                
+                $("#formularioEdicionTerritorio").hide();   
+                $("#guardarModificacion").hide();
+                $("#cancelarModificacion").hide();
+                $(".insertar").show();  
+             
                var valor = new Array();
                $(".idterritorio").each(function (index,value){
                    
@@ -459,7 +464,155 @@
                
            });
            
+    //Funcion ajax para guardar en tiempo real
            
+        function insertarDatos(){
+           
+            var data = new Array();
+            var campos = new Array();
+            //Primer Each me sirve para recorrer todos los text
+             $(".territorioTextBox").each(function(k, va) {
+                    var cadena = $(this).siblings().html() +"="+$(this).val();
+                    campos.push($(this).val());
+             });
+           
+             data.push(campos);
+             console.log(data);  
+                    
+          var request2 = {
+                    request : campos
+                };
+           
+
+            $.ajax({
+              data:request2,
+              url:"{{path('insert_territorio')}}",
+              type: "post",
+              
+              success: function (data) {
+                        var retorno =data.flag;
+                       if(retorno==1){
+                           
+                           $("#formularioInsercionTerritorio").hide();
+                              $(".guardar").hide();
+                              $(".cancelar").hide();
+                              $(".insertar").show();
+                              $(".territorioTextBox").val("");
+                             
+                              
+                            var table = $('#lista_territorios').DataTable();
+                            table.ajax.reload( function ( json ) {
+                               
+                            });
+                           Lobibox.notify("success", {
+                                        size: 'mini',
+                                        msg: 'Datos ingresados con exito'
+                                    });
+                            
+                       }else
+                            {
+                                  Lobibox.notify("success", {
+                                        size: 'mini',
+                                        msg: retorno
+                                    });
+                            }
+                       
+                    },
+              error: function (data) {
+                     
+                          
+                            Lobibox.notify("error", {
+                                        size: 'mini',
+                                        msg: 'Los datos no fueron ingresados, intente más tarde. Si el error persiste pongase en contacto con el administrador del sistema.'
+                                    });
+                       
+                    }      
+                     
+              
+            });
+            
+            
+            
+	}
+        
+   //Funcion para poder modificar los datos por medio de ajax  
+        
+        function modificarDatos(){
+                    
+            var data = new Array();
+            var campos = new Array();
+            //Primer Each me sirve para recorrer todos los text
+            campos.push(numero_edicion);
+             $(".territorioTextBoxEdit").each(function(k, va) {
+                    var cadena = $(this).siblings().html() +"="+$(this).val();
+                    campos.push($(this).val());
+             });
+             
+           
+             
+             data.push(campos);
+             console.log(data);  
+                    
+           var request2 = {
+                    request : campos
+                };
+                console.log(campos);
+                
+                
+            $.ajax({
+              data:request2,
+              url:"{{path('edit_territorio')}}",
+              type: "post",
+              
+              
+              success: function (data) {
+                        var retorno = data.flag;
+                       if(retorno==1){
+                           
+                           $("#formularioEdicionTerritorio").hide();
+                           $("#cancelarModificacion").hide();
+                           $("#guardarModificacion").hide();
+                           $(".insertar").show();
+                              $(".territorioTextBoxEdit").val("");
+                              
+                              
+                            var table = $('#lista_territorios').DataTable();
+                            table.ajax.reload( function ( json ) {
+                               
+                            });
+                           Lobibox.notify("success", {
+                                        size: 'mini',
+                                        msg: 'Datos modificados con exito'
+                                    });
+                            
+                       }else
+                            {
+                                  Lobibox.notify("success", {
+                                        size: 'mini',
+                                        msg: retorno
+                                    });
+                            }
+                       
+                    },
+              error: function (data) {
+                           
+                          
+                                    Lobibox.notify("error", {
+                                        size: 'mini',
+                                        msg: 'Los datos no fueron modificados, intente más tarde. Si el error persiste pongase en contacto con el administrador del sistema.'
+                                    });
+                       
+                    }      
+                    
+                    
+                    
+              
+            });
+               
+               
+        
+        }      
+                 
      
 
 

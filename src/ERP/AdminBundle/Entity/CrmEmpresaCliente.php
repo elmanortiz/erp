@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CrmEmpresaCliente
  *
  * @ORM\Table(name="crm_empresa_cliente")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ERP\CRMBundle\Repository\CrmEmpresaClienteRepository")
  */
 class CrmEmpresaCliente
 {
@@ -310,7 +310,10 @@ class CrmEmpresaCliente
         return $this->estado;
     }
     
-    
+     public function __toString() {
+        
+         return $this->nombre;
+    }
     
     
     
