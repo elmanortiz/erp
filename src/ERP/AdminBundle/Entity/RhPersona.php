@@ -395,4 +395,7 @@ class RhPersona
     {
         return $this->ctlCiudad;
     }
+     public function __toString() {
+  return $this->nombres;
+}
 }

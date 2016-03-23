@@ -3,6 +3,7 @@
 namespace ERP\RrhhBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -52,9 +53,9 @@ class RrhhPersonaController extends Controller {
         $draw = $request->query->get('draw');
         $longitud = $request->query->get('length');
         $busqueda = $request->query->get('search');
-
+      try {
         $em = $this->getDoctrine()->getEntityManager();
-        $territoriosTotal = $em->getRepository('ERPAdminBundle:RhPersona')->findBy(array('estado' => 'Activo'));
+        $territoriosTotal = $em->getRepository('ERPAdminBundle:RhPersona')->findAll();
 
         $territorio['draw'] = $draw++;
         $territorio['recordsTotal'] = count($territoriosTotal);
@@ -66,10 +67,17 @@ class RrhhPersonaController extends Controller {
         $arrayFiltro = explode(' ', $busqueda['value']);
 
         //echo count($arrayFiltro);
-        $busqueda['value'] = str_replace(' ', '%', $busqueda['value']);
+        
+  
+            
+            $busqueda['value'] = str_replace(' ', '%', $busqueda['value']);
         if ($busqueda['value'] != '') {
 
-            $dql = "Select  From rh_persona p join rh_detalle_empleo dp on p.id=dp.ctl_tipo_empleo_id and dp.estado='Activo'";
+          /*  $dql = "Select concat(p.nombres,' ',p.apellido) AS nombre, dp.estado, pp.nombre_puesto AS nombrePuesto, "
+                    . "concat(concat('<input type=\"checkbox\" class=\"checkbox ideproveedor\" id=\"',p.id), '\">' as link "
+                    . "from rh_persona p join rh_detalle_empleo dp on p.id=dp.rh_persona_id "
+                    . "join rh_persona_puesto_perfil ppp on ppp.rh_persona_id=p.id "
+                    . "join rh_puesto_perfil pp on ppp.rh_puesto_perfil_id=pp.id";
 
             //Aqui estas trabjando
             $territorio['data'] = $em->createQuery($dql)
@@ -89,21 +97,41 @@ class RrhhPersonaController extends Controller {
                     ->setParameters(array('busqueda' => "%" . $busqueda['value'] . "%"))
                     ->setFirstResult($start)
                     ->setMaxResults($longitud)
-                    ->getResult();
+                    ->getResult();*/
         } else {
-            $dql = "Select concat(p.nombres,' ',p.apellido) AS nombre, dp.estado, pp.nombre_puesto 
-                            from rh_persona p join rh_detalle_empleo dp on p.id=dp.rh_persona_id
-                            join rh_persona_puesto_perfil ppp on ppp.rh_persona_id=p.id 
-                            join rh_puesto_perfil pp on ppp.rh_puesto_perfil_id=pp.id
-                            ";
-            $territorio['data'] = $em->createQuery($dql)
+            
+             $sql = "SELECT concat(concat('<input type=\"checkbox\" class=\"checkbox idpersona\" id=\"',p.id), '\">') AS link, "
+                        . " concat(p.nombres,' ',p.apellido) AS nombre, dp.estado AS estado, pp.nombre_puesto AS puesto "
+                        . " FROM rh_persona p "
+                        . "LEFT JOIN rh_detalle_empleo dp ON p.id=dp.rh_persona_id "
+                        . "LEFT JOIN rh_persona_puesto_perfil ppp ON ppp.rh_persona_id=p.id "
+                        . "LEFT JOIN rh_puesto_perfil pp ON ppp.rh_puesto_perfil_id=pp.id ";
+                $stm = $this->container->get('database_connection')->prepare($sql);
+                $stm->execute();
+                $territorio['data'] = $stm->fetchAll();
+
+                /*   $dql = "SELECT concat(p.nombres,' ',p.apellido) AS nombre, dp.estado AS estado, pp.nombre_puesto AS puesto "
+                    ." FROM rh_persona p "
+                    ."LEFT JOIN rh_detalle_empleo dp ON p.id=dp.rh_persona_id "
+                    ."LEFT JOIN rh_persona_puesto_perfil ppp ON ppp.rh_persona_id=p.id "
+                    ."LEFT JOIN rh_puesto_perfil pp ON ppp.rh_puesto_perfil_id=pp.id ";*/
+            
+           /* $territorio['data'] = $em->createQuery($dql)
                     ->setFirstResult($start)
                     ->setMaxResults($longitud)
-                    ->getResult();
+                    ->getResult();*/
         }
+      
 
 
         return new Response(json_encode($territorio));
+        }
+ catch (\Exception $e)
+ {
+     echo $e->getMessage();
+      return new Response(json_encode($e->getMessage()));
+ }
+        
     }
 
     /**
@@ -602,6 +630,7 @@ class RrhhPersonaController extends Controller {
                 }
                 $data['msj'] = "Actualizado";
             }
+            
             else {
                 $RhPersona->setNombres($datos['txtnombre']);
                 $RhPersona->setApellido($datos['txtapellido']);

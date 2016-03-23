@@ -4,6 +4,10 @@
    var formacion= [];
    var datosExperiencia=[];
    var experiencia= [];
+   var datosIngresos=[];
+   var ingresos=[];
+   var deduccion=[];
+   var datosDeduccion=[];
   jQuery.noConflict();
           jQuery(function($){
     $("#txtdui").mask("99999999-9");
@@ -76,6 +80,7 @@
                         });
     
                  
+                     
     
     /*
      $("#divEsatdo").empty();
@@ -340,11 +345,27 @@ function enviarf()
     return false;
 }
            
-  function formacionA()
-  {
-      
-        if($(":hidden#hIdPersona").val())
-        {         
-         
-        }
-    }
+ // Estructura de salario
+ function enviarEstructura()
+{
+   console.log(datosIngresos);
+     console.log(datosDeduccion);
+     jQuery(document).ready(function($) {
+  
+       $.ajax({
+                type: "GET",
+                url:Routing.generate('registrar_estructura'),              
+                data:{persona:$("#sPersona").prop('selectedIndex'),datosIngreso:datosIngresos,datosDeduccion:datosDeduccion},
+                success: function(data) 
+                {
+                alert(data); 
+                },
+                  error : function(xhr, status) 
+                  {
+                   alert('Disculpe, existió un problema');
+                },
+            });
+        });
+ 
+    return false;
+}
