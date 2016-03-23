@@ -152,4 +152,7 @@ class CtlEmpresa
     {
         return $this->giro;
     }
+      public function __toString() {
+   return $this->nombreEmpresa;
+}
 }
